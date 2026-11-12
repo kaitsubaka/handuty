@@ -43,5 +43,5 @@ export function errorMessageId(error) {
   if (error?.name && AUTH_ERRORS[error.name]) {
     return AUTH_ERRORS[error.name];
   }
-  return globalThis.navigator?.onLine === false ? 'serverProblem' : 'SendError';
+  return globalThis.navigator?.onLine === false ? 'serverProblem' : 'error.INTERNAL';
 }

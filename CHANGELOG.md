@@ -6,6 +6,10 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
 ### Fixed
 
+- Every custom operation failed on the deployed backend: the `api` Lambda read
+  `event.info.fieldName` (the direct AppSync resolver shape) instead of the top-level
+  `fieldName` that Amplify's function resolver sends. Unexpected errors now show the generic
+  server message instead of the booking one.
 - `package-lock.json` lost the packages bundled inside the Amplify constructs again when the
   lint tools were installed; it is complete again and `npm run check:lock` catches it.
 

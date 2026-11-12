@@ -1,9 +1,9 @@
-import type { AppSyncIdentityCognito, AppSyncResolverEvent } from 'aws-lambda';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/data';
 import { getAmplifyDataClientConfig } from '@aws-amplify/backend/function/runtime';
 import { env } from '$amplify/env/api';
 import type { Schema } from '../../data/resource';
+import { readInvocation, type FunctionInvocation } from './invocation';
 import {
   RuleError,
   applyRating,
@@ -333,19 +333,15 @@ const resolvers: Record<string, (args: Args, context: Context) => Promise<unknow
   sendMessage,
 };
 
-export const handler = async (event: AppSyncResolverEvent<Args>) => {
-  const field = event.info.fieldName;
+export const handler = async (event: FunctionInvocation<Args>) => {
+  const { field, args, callerId } = readInvocation(event);
   const resolver = resolvers[field];
   if (!resolver) {
     console.error('[api] no resolver for field', field);
     throw new Error('HANDUTY:INTERNAL');
   }
-  const identity = event.identity as AppSyncIdentityCognito | null;
-  if (!identity?.sub) {
-    throw new RuleError('UNAUTHENTICATED');
-  }
   try {
-    return await resolver(event.arguments, { callerId: identity.sub, now: new Date() });
+    return await resolver(args, { callerId, now: new Date() });
   } catch (error) {
     if (error instanceof RuleError) {
       console.info('[api] rule rejected', field, error.code);
