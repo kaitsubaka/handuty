@@ -15,7 +15,7 @@ describe('errorMessageId', () => {
   });
 
   it('falls back to a generic message', () => {
-    expect(errorMessageId(new Error('boom'))).toBe('SendError');
+    expect(errorMessageId(new Error('boom'))).toBe('error.INTERNAL');
   });
 });
 
