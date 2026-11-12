@@ -4,9 +4,10 @@ Current limitations and work still to do. Implemented changes belong in `CHANGEL
 
 ## Deploy
 
-- Test accounts: create them in the Amplify console (Authentication → User management →
-  Create user) with a Cognito-generated password sent by email; public sign-up is closed
-  (SPECS D12).
+- Demo accounts: `scripts/create-demo-users.sh <user-pool-id>` in AWS CloudShell creates the two
+  accounts listed in `README.md`; public sign-up is closed (SPECS D12).
+- The demo passwords are public: anyone can sign in and change them through the Cognito API,
+  which would lock the demo out until the script runs again.
 
 - Local sandbox (optional): install the AWS CLI (`winget install Amazon.AWSCLI`), sign in with
   IAM Identity Center (`aws configure sso`), then `npx ampx sandbox` deploys a personal copy
