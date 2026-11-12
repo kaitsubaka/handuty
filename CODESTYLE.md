@@ -30,17 +30,34 @@
 
 ## Formatting
 
-- 2-space indentation, single quotes, semicolons, trailing commas, lines up to ~110 chars.
+- Prettier formats everything (`.prettierrc.json`: single quotes, semicolons, trailing
+  commas, 100 columns). Run `npm run format` before every commit.
+- ESLint must report nothing (`npm run lint`): the React, Hooks and Fast Refresh rules for the
+  front end and typescript-eslint for `amplify/`. Fix the finding instead of disabling the
+  rule. The Amplify build runs `lint` and `format:check` and fails on either.
 - React: function components and hooks; one page per file in `src/pages/` with its CSS next to
   it; shared pieces in `src/components/`.
+
+## Branches (gitflow)
+
+- `master` is production: it only receives merges from `release/*` and `hotfix/*`.
+- `develop` is the integration branch; every `feature/*` starts from it and returns to it
+  through a pull request.
+- `feature/<kebab-name>` for new work, `release/<version>` to prepare a version (only fixes,
+  version bump and `CHANGELOG.md`), `hotfix/<kebab-name>` from `master` for urgent fixes,
+  merged back into both `master` and `develop`.
+- Versions follow SemVer and are tagged on `master` (`v2.0.0`).
+- Never push directly to `master` or `develop`; never force-push them.
 
 ## Commits
 
 - Conventional Commits: `type(scope): summary` in the imperative, lower case, no final dot.
-  Types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`, `build`, `ci`. Scopes: `auth`,
+  Types: `feat`, `fix`, `docs`, `style`, `test`, `refactor`, `chore`, `build`, `ci`. Scopes: `auth`,
   `data`, `api`, `ui`, `deploy`.
 - The body explains why when it is not obvious. Commits made with Claude end with its
   `Co-Authored-By` line.
+- Pull request titles follow the same format; the description says what changed, why, and how
+  it was tested.
 
 ## Tracking work
 

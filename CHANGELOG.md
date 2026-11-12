@@ -6,6 +6,11 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
 ### Changed
 
+- Prettier and ESLint format and lint the code; the Amplify build fails on any finding.
+- Gitflow branches (`develop`, `feature/*`, `release/*`, `hotfix/*`) and Conventional Commits.
+- Effects no longer reset state synchronously: modals reset on show, lists are keyed by what
+  they were loaded for, and the session provider lives apart from `useSession`.
+
 - Public sign-up is closed on the deployed demo: Cognito only admits accounts created by the
   owner, `/register` redirects to the login page and the sign-up links are hidden.
 

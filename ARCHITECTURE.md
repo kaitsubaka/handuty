@@ -125,5 +125,7 @@ needs AWS.
 
 ## 7. Code standards
 
-`CODESTYLE.md`. Logs use a `[tag]` prefix (`[api]`, `[session]`, `[messages]`…), `error` for
+`CODESTYLE.md`. Prettier and ESLint (`eslint.config.js`) run in the Amplify build before the
+tests. Branches follow gitflow (`develop`, `feature/*`, `release/*`, `hotfix/*`, `master`).
+Logs use a `[tag]` prefix (`[api]`, `[session]`, `[messages]`…), `error` for
 what failed and must be looked at, `warn` for what the app works around, `info` for events.
