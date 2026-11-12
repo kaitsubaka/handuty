@@ -202,5 +202,9 @@
     "error.INVALID_MESSAGE": "The message must have 1 to 1000 characters",
     "error.FORBIDDEN": "You are not allowed to do this",
     "error.UNAUTHENTICATED": "Your session ended, sign in again",
-    "error.INTERNAL": "A server error happened, try again"
+    "error.INTERNAL": "A server error happened, try again",
+    "SignUpClosed": "Sign-up is closed: this demo uses test accounts.",
+    "NewPasswordTitle": "This is your first sign-in: choose a new password.",
+    "NewPassword": "New password",
+    "SaveNewPassword": "Save password"
 }

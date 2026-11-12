@@ -2,6 +2,18 @@
 
 Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
+## 2026-11-12 — v2.0.1
+
+### Changed
+
+- Public sign-up is closed on the deployed demo: Cognito only admits accounts created by the
+  owner, `/register` redirects to the login page and the sign-up links are hidden.
+
+### Added
+
+- First sign-in of an account created in Cognito: the login page asks for a new password and
+  then sends the user to complete the profile.
+
 ## 2026-11-12 — v2.0.0
 
 ### Changed

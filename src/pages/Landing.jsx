@@ -6,6 +6,7 @@ import clientIcon from '../assets/perfilBar.svg';
 import workerIcon from '../assets/trabajador.svg';
 import Graph from '../components/Graph';
 import { useSession } from '../context/Session';
+import { signUpOpen } from '../lib/config';
 import './Landing.css';
 
 export default function Landing() {
@@ -48,11 +49,13 @@ export default function Landing() {
                   <FormattedMessage id="Login" />
                 </p>
               </Link>
-              <Link to="/register">
-                <p>
-                  <FormattedMessage id="Register" />
-                </p>
-              </Link>
+              {signUpOpen && (
+                <Link to="/register">
+                  <p>
+                    <FormattedMessage id="Register" />
+                  </p>
+                </Link>
+              )}
             </div>
           )}
         </header>

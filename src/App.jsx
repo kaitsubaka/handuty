@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Loading from './components/Loading';
 import RequireSession from './components/RequireSession';
 import { ROLES } from './constants/roles';
+import { signUpOpen } from './lib/config';
 import './App.css';
 
 const Landing = lazy(() => import('./pages/Landing'));
@@ -27,7 +28,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={signUpOpen ? <Register /> : <Navigate to="/login" replace />} />
         <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/home" element={signedIn(<Home />)} />
         <Route path="/services" element={signedIn(<Services />, ROLES.CLIENT)} />

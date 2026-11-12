@@ -63,3 +63,11 @@ export function loginErrors(form) {
     form,
   );
 }
+
+/** First sign-in of an account created in Cognito: the new password and its repetition. */
+export function newPasswordErrors(form) {
+  return fieldsWithErrors(
+    Joi.object({ password, passwordRepeat: Joi.valid(Joi.ref('password')).required() }),
+    form,
+  );
+}

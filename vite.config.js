@@ -6,5 +6,6 @@ export default defineConfig({
   server: { port: 3000 },
   test: {
     include: ['tests/**/*.test.{ts,js,jsx}'],
+    env: { VITE_SIGN_UP_OPEN: 'true' },
   },
 });

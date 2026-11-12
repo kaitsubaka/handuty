@@ -4,6 +4,10 @@ Current limitations and work still to do. Implemented changes belong in `CHANGEL
 
 ## Deploy
 
+- Test accounts: create them in the Amplify console (Authentication → User management →
+  Create user) with a Cognito-generated password sent by email; public sign-up is closed
+  (SPECS D12).
+
 - Local sandbox (optional): install the AWS CLI (`winget install Amazon.AWSCLI`), sign in with
   IAM Identity Center (`aws configure sso`), then `npx ampx sandbox` deploys a personal copy
   and writes `amplify_outputs.json`.

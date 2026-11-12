@@ -34,6 +34,14 @@
 - React: function components and hooks; one page per file in `src/pages/` with its CSS next to
   it; shared pieces in `src/components/`.
 
+## Commits
+
+- Conventional Commits: `type(scope): summary` in the imperative, lower case, no final dot.
+  Types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore`, `build`, `ci`. Scopes: `auth`,
+  `data`, `api`, `ui`, `deploy`.
+- The body explains why when it is not obvious. Commits made with Claude end with its
+  `Co-Authored-By` line.
+
 ## Tracking work
 
 - Pending work and known limitations: `TODO.md` (bullets).

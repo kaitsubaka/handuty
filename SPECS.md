@@ -34,10 +34,11 @@ the back end to **AWS Amplify Gen 2**, inside the AWS Free Tier.
 | D9 | The look (CSS, illustrations, icons) and the Spanish/English texts are kept | The product design was finished; only the plumbing was broken |
 | D10 | Sign-up uses Cognito with email verification; the profile is created right after the first sign-in | No Cognito custom attributes or triggers to maintain; a user who confirmed on another device is sent to "complete profile" |
 | D11 | The landing chart is public through the Identity Pool guest role (read-only `Service`) | v1 showed it to anonymous visitors |
+| D12 | The deployed demo has no public sign-up: the owner creates the test accounts in Cognito, each sets its own password on the first sign-in and then completes its profile | Keeps strangers and spam out of a Free Tier demo and within Cognito's default email quota; `VITE_SIGN_UP_OPEN=true` plus `allowAdminCreateUserOnly: false` reopen the sign-up flow, which stays implemented and tested |
 
 ## 3. Roles and use cases
 
-Two roles, chosen at sign-up and never changed: `CLIENT` and `WORKER`.
+Two roles, chosen when the profile is created and never changed: `CLIENT` and `WORKER`.
 
 | Id | Actor | Use case |
 |---|---|---|

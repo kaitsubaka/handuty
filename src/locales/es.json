@@ -202,5 +202,9 @@
     "error.INVALID_MESSAGE": "El mensaje debe tener entre 1 y 1000 caracteres",
     "error.FORBIDDEN": "No tienes permiso para hacer esto",
     "error.UNAUTHENTICATED": "Tu sesión terminó, vuelve a iniciar sesión",
-    "error.INTERNAL": "Ocurrió un error en el servidor, inténtalo de nuevo"
+    "error.INTERNAL": "Ocurrió un error en el servidor, inténtalo de nuevo",
+    "SignUpClosed": "El registro está cerrado: esta demo usa cuentas de prueba.",
+    "NewPasswordTitle": "Es tu primer inicio de sesión: elige una contraseña nueva.",
+    "NewPassword": "Nueva contraseña",
+    "SaveNewPassword": "Guardar contraseña"
 }

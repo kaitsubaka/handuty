@@ -52,7 +52,7 @@ src/                        React app (JSX)
   constants/                categories, roles, navigation
   locales/                  es.json, en.json (same keys, enforced by a test)
   assets/                   illustrations and icons of v1
-tests/                      vitest: rules (node), api helpers, Register and Book (jsdom)
+tests/                      vitest: rules (node), api helpers, Login, Register and Book (jsdom)
 amplify.yml                 Amplify Hosting build: backend pipeline-deploy, tests, Vite build
 ```
 
@@ -91,7 +91,12 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
   It reloads on Hub `signedIn`/`signedOut` and after profile changes (`refresh`).
 - **Guards** (`RequireSession`): signed-out users go to `/login`, users without a profile to
   `/complete-profile`, a page for the other role redirects to `/home`.
-- **Sign-up**: step 1 (account) → step 2 (personal data) → `signUp` → step 3 (email code) →
+- **Closed sign-up** (`lib/config.js`, D12): unless the build sets `VITE_SIGN_UP_OPEN=true`,
+  `/register` redirects to `/login` and the sign-up links are hidden. Accounts created in
+  Cognito sign in with a temporary password; `Login` answers the
+  `CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED` step with `confirmSignIn`, and the guard then
+  sends the user to `/complete-profile` to pick a role and fill the profile.
+- **Sign-up** (when open): step 1 (account) → step 2 (personal data) → `signUp` → step 3 (email code) →
   `confirmSignUp` → `signIn` → `registerProfile`. The step 2 data is kept in `sessionStorage`
   (`lib/pendingProfile.js`) so a reload or a sign-in from the login page can finish it in
   `/complete-profile`.
@@ -112,6 +117,7 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
 | `tests/rules.test.ts` | node | every business rule and error code |
 | `tests/api.test.js` | node | error mapping, `unwrap`, locale key parity, every backend code translated |
 | `tests/register.test.jsx` | jsdom | step validation, underage refusal, sign-up → confirm → profile, Cognito error |
+| `tests/login.test.jsx` | jsdom | sign-in, first sign-in with a new password (validated) |
 | `tests/book.test.jsx` | jsdom | total price, booking call, busy slot refused locally, backend rule message |
 
 Amplify, Cognito and the session are mocked at the module boundary (`vi.mock`); no test
