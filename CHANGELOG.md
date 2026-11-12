@@ -4,6 +4,22 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
 ## 2026-11-12 — v2.0.1
 
+### Added
+
+- First sign-in of an account created in Cognito: the login page asks for a new password and
+  then sends the user to complete the profile.
+- Two shared demo accounts (Worker and Customer) documented in `README.md`, created by
+  `scripts/create-demo-users.sh`.
+
+### Changed
+
+- Public sign-up is closed on the deployed demo: Cognito only admits accounts created by the
+  owner, `/register` redirects to the login page and the sign-up links are hidden.
+- Prettier and ESLint format and lint the code; the Amplify build fails on any finding.
+- Gitflow branches (`develop`, `feature/*`, `release/*`, `hotfix/*`) and Conventional Commits.
+- Effects no longer reset state synchronously: modals reset on show, lists are keyed by what
+  they were loaded for, and the session provider lives apart from `useSession`.
+
 ### Fixed
 
 - Every custom operation failed on the deployed backend: the `api` Lambda read
@@ -12,21 +28,6 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
   server message instead of the booking one.
 - `package-lock.json` lost the packages bundled inside the Amplify constructs again when the
   lint tools were installed; it is complete again and `npm run check:lock` catches it.
-
-### Changed
-
-- Prettier and ESLint format and lint the code; the Amplify build fails on any finding.
-- Gitflow branches (`develop`, `feature/*`, `release/*`, `hotfix/*`) and Conventional Commits.
-- Effects no longer reset state synchronously: modals reset on show, lists are keyed by what
-  they were loaded for, and the session provider lives apart from `useSession`.
-
-- Public sign-up is closed on the deployed demo: Cognito only admits accounts created by the
-  owner, `/register` redirects to the login page and the sign-up links are hidden.
-
-### Added
-
-- First sign-in of an account created in Cognito: the login page asks for a new password and
-  then sends the user to complete the profile.
 
 ## 2026-11-12 — v2.0.0
 
