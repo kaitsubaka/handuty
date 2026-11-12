@@ -1,0 +1,45 @@
+# Changelog
+
+Implemented changes, newest first. Pending work belongs in `TODO.md`.
+
+## 2026-11-12 — v2.0.0
+
+### Changed
+
+- Back end moved from Express + MongoDB + socket.io to AWS Amplify Gen 2: Cognito (email
+  sign-in with verification code), AppSync + DynamoDB, one Lambda (`api`) for every write.
+- Front end moved from Create React App to Vite, React 19, React Router 7 and Bootstrap 5,
+  keeping the v1 design, illustrations and Spanish/English texts.
+- Repository flattened: the app is at the root, the backend in `amplify/`.
+- A service's rating is now the average of its clients' ratings; v1 stored a single number.
+- A booking's price is the hourly price times its duration; v1 stored the hourly price.
+- Prices are shown as Colombian pesos with the locale's separators.
+
+### Added
+
+- Business rules enforced on the server: adults only, one service per category per worker, no
+  overlapping bookings, bookings on 30-minute slots of 30–120 minutes, cancel only before the
+  start, rate once after the end, chat only between its two participants.
+- Personal data (phone, ID number, birth date, address) readable only by its owner.
+- Email verification step in the sign-up and a "complete profile" page.
+- Booking calendar that disables taken slots and shows the total.
+- Appointments for workers, cancel for clients, and live chat through AppSync subscriptions.
+- Profile page with contact data edit and the worker's services (add, edit, delete).
+- Translated messages for every error a user can cause.
+- Workers-per-category chart now draws its bars and is public through guest access.
+- 52 tests (business rules, helpers, sign-up and booking flows) and `amplify.yml` for Amplify
+  Hosting.
+
+### Fixed
+
+- v1 stored passwords in plain text and compared them in the API; Cognito handles them now.
+- v1 controllers queried by the wrong filter (`find(id)`), returned past bookings as
+  upcoming (filters without `return`) and referenced a missing `Trabajador` model.
+- v1 pages called endpoints that did not exist (`/clientes`, `/trabajadores`), and the session
+  context had no `loginUser`/`logout`, so sign-in and sign-out never worked.
+
+### Removed
+
+- The Express API, MongoDB models, socket.io server and Postman collections.
+- The CRA service worker (offline mode) and web-vitals reporting.
+- The decorative QR icon on appointments.
