@@ -1,88 +1,87 @@
 .Sidebar {
-    background-color: #373842;
-    width: 270px;
-    height: 100%;
-    position: fixed;
+  background-color: #373842;
+  width: 270px;
+  height: 100%;
+  position: fixed;
 }
 
 .logobar {
-    display: flex;
-    justify-content: center;
-    padding-top: 8vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 8vh;
 }
 
 .logoimg {
-    height: 75px;
+  height: 75px;
 }
 
 .menubar {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 15vh;
-    /*margin-left: 3rem;*/
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15vh;
+  /*margin-left: 3rem;*/
 }
 
 .bar-items {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .bar-text {
-    list-style: none;
-    height: 30px;
-    margin-bottom: 50px;
-    border-left: 6px solid transparent;
+  list-style: none;
+  height: 30px;
+  margin-bottom: 50px;
+  border-left: 6px solid transparent;
 }
 
-
 .bar-text a {
-    margin-left: 3.5rem;
-    text-decoration: none;
-    font-family: "Open Sans";
-    font-size: 16px;
-    color: white;
-    display: flex;
-    align-items: center;
+  margin-left: 3.5rem;
+  text-decoration: none;
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 
 .bar-text a:hover {
-    text-decoration: none;
-    color: #cccccc;
+  text-decoration: none;
+  color: #cccccc;
 }
 
 .bar-text span {
-    padding-left: 40px;
+  padding-left: 40px;
 }
 
 .iconItems {
-    height: 25px;
-    width: 25px;
+  height: 25px;
+  width: 25px;
 }
 
 .outbar {
-    position: absolute;
-    bottom: 0;
-    justify-content: flex-start;
-    margin-bottom: 1vh;
-    /*margin-left: 3rem;*/
+  position: absolute;
+  bottom: 0;
+  justify-content: flex-start;
+  margin-bottom: 1vh;
+  /*margin-left: 3rem;*/
 }
 
 @media (max-height: 600px) {
-    .outbar {
-        position: relative;
-    }
+  .outbar {
+    position: relative;
+  }
 }
 
 @media (min-width: 1600px) {
-    .Sidebar {
-        width: 310px;
-    }
+  .Sidebar {
+    width: 310px;
+  }
 
-    .logoimg {
-        height: 85px;
-    }
+  .logoimg {
+    height: 85px;
+  }
 
-    .bar-text a {
-        margin-left: 4.5rem;
-    }
+  .bar-text a {
+    margin-left: 4.5rem;
+  }
 }

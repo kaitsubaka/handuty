@@ -14,7 +14,9 @@ export default function Conversation({ chat, viewerRole, selected, onSelect }) {
     >
       <img className="conversationImg" src={viewerIsClient ? workerAvatar : clientAvatar} alt="" />
       <span className="conversationText">
-        <span className="conversationName">{viewerIsClient ? chat.workerName : chat.clientName}</span>
+        <span className="conversationName">
+          {viewerIsClient ? chat.workerName : chat.clientName}
+        </span>
         {chat.lastMessage && <span className="conversationLast">{chat.lastMessage}</span>}
       </span>
     </button>

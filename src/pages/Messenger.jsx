@@ -28,7 +28,9 @@ function withMessage(thread, message) {
 
 function withActivity(chats, chatId, message) {
   const updated = chats.map((chat) =>
-    chat.id === chatId ? { ...chat, lastMessage: message.content, lastMessageAt: message.sentAt } : chat,
+    chat.id === chatId
+      ? { ...chat, lastMessage: message.content, lastMessageAt: message.sentAt }
+      : chat,
   );
   return updated.sort((a, b) => b.lastMessageAt.localeCompare(a.lastMessageAt));
 }
@@ -64,11 +66,16 @@ export default function Messenger() {
     }
     let active = true;
     all((nextToken) =>
-      client.models.Message.messagesByChat({ chatId: openChatId }, { sortDirection: 'ASC', limit: 100, nextToken }),
+      client.models.Message.messagesByChat(
+        { chatId: openChatId },
+        { sortDirection: 'ASC', limit: 100, nextToken },
+      ),
     )
       .then((loaded) => active && setThread({ chatId: openChatId, messages: loaded }))
       .catch((error) => console.error('[messages] could not load messages', error));
-    const subscription = client.models.Message.onCreate({ filter: { chatId: { eq: openChatId } } }).subscribe({
+    const subscription = client.models.Message.onCreate({
+      filter: { chatId: { eq: openChatId } },
+    }).subscribe({
       next: (message) => {
         setThread((current) => withMessage(current, message));
         setChats((current) => withActivity(current, message.chatId, message));
@@ -118,7 +125,9 @@ export default function Messenger() {
     <AppLayout>
       <div className="messenger">
         {chats.length === 0 ? (
-          <EmptyState messageId={session.profile.role === ROLES.CLIENT ? 'NoChatsClient' : 'NoChatsWorker'} />
+          <EmptyState
+            messageId={session.profile.role === ROLES.CLIENT ? 'NoChatsClient' : 'NoChatsWorker'}
+          />
         ) : (
           <div className="chatPrincipal">
             <div className="chatMenu">
@@ -163,7 +172,11 @@ export default function Messenger() {
                           }
                         }}
                       />
-                      <button type="submit" className="chatSubmitButton" disabled={sending || !draft.trim()}>
+                      <button
+                        type="submit"
+                        className="chatSubmitButton"
+                        disabled={sending || !draft.trim()}
+                      >
                         <FormattedMessage id="Send" />
                       </button>
                     </form>

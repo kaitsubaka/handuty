@@ -33,7 +33,11 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
     const free = CATEGORIES.find((category) => !takenCategories.includes(category.key));
     setForm(
       service
-        ? { category: service.category, pricePerHour: String(service.pricePerHour), description: service.description }
+        ? {
+            category: service.category,
+            pricePerHour: String(service.pricePerHour),
+            description: service.description,
+          }
         : { ...EMPTY, category: free?.key ?? EMPTY.category },
     );
     setTouched(false);
@@ -91,7 +95,9 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
                 <option
                   key={category.key}
                   value={category.key}
-                  disabled={category.key !== service?.category && takenCategories.includes(category.key)}
+                  disabled={
+                    category.key !== service?.category && takenCategories.includes(category.key)
+                  }
                 >
                   {intl.formatMessage({ id: category.messageId })}
                 </option>

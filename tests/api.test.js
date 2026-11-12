@@ -22,7 +22,9 @@ describe('errorMessageId', () => {
 describe('unwrap', () => {
   it('returns data or throws the GraphQL errors', () => {
     expect(unwrap({ data: { id: 1 } })).toEqual({ id: 1 });
-    expect(() => unwrap({ data: null, errors: [{ message: 'HANDUTY:FORBIDDEN' }] })).toThrow(ApiError);
+    expect(() => unwrap({ data: null, errors: [{ message: 'HANDUTY:FORBIDDEN' }] })).toThrow(
+      ApiError,
+    );
   });
 });
 
@@ -34,10 +36,18 @@ describe('locales', () => {
   it('translate every rule code the backend can send', async () => {
     const { readFile } = await import('node:fs/promises');
     const sources = await Promise.all(
-      ['amplify/functions/api/rules.ts', 'amplify/functions/api/handler.ts'].map((file) => readFile(file, 'utf8')),
+      ['amplify/functions/api/rules.ts', 'amplify/functions/api/handler.ts'].map((file) =>
+        readFile(file, 'utf8'),
+      ),
     );
     const codes = new Set(
-      sources.flatMap((source) => [...source.matchAll(/(?:RuleError\(|ensure\([^;]*?|found\([^;]*?|HANDUTY:)'?([A-Z][A-Z_]{3,})'/gs)].map((match) => match[1])),
+      sources.flatMap((source) =>
+        [
+          ...source.matchAll(
+            /(?:RuleError\(|ensure\([^;]*?|found\([^;]*?|HANDUTY:)'?([A-Z][A-Z_]{3,})'/gs,
+          ),
+        ].map((match) => match[1]),
+      ),
     );
     for (const code of codes) {
       expect(es, code).toHaveProperty([`error.${code}`]);

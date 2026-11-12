@@ -45,7 +45,10 @@ describe('Login', () => {
 
     await signInWith(user, 'Str0ng!Pass');
 
-    expect(auth.signIn).toHaveBeenCalledWith({ username: 'worker@example.com', password: 'Str0ng!Pass' });
+    expect(auth.signIn).toHaveBeenCalledWith({
+      username: 'worker@example.com',
+      password: 'Str0ng!Pass',
+    });
     expect(session.refresh).toHaveBeenCalled();
   });
 

@@ -34,7 +34,8 @@ export async function run(request) {
 
 /** Message id (see `src/locales`) that explains `error` to the user. */
 export function errorMessageId(error) {
-  const messages = error instanceof ApiError ? error.errors.map((e) => e.message) : [error?.message];
+  const messages =
+    error instanceof ApiError ? error.errors.map((e) => e.message) : [error?.message];
   const rule = messages.find((message) => message?.startsWith(RULE_PREFIX));
   if (rule) {
     return `error.${rule.slice(RULE_PREFIX.length)}`;

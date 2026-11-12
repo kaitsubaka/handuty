@@ -58,14 +58,14 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
 
 ## 3. Data schema (`amplify/data/resource.ts`)
 
-| Model | Identifier | Secondary indexes (query field) | Read rule |
-|---|---|---|---|
-| `Profile` | `userId` | – | `authenticated` |
-| `PrivateProfile` | `userId` | – | `ownerDefinedIn('userId').identityClaim('sub')` |
-| `Service` | `id` | `workerId` (`servicesByWorker`), `category` (`servicesByCategory`) | `authenticated`, `guest` |
-| `Booking` | `id` | `clientId`+`startAt` (`bookingsByClient`), `workerId`+`startAt` (`bookingsByWorker`), `serviceId`+`startAt` (`bookingsByService`) | owner in `clientId`, owner in `workerId` |
-| `Chat` | `id` = `<clientId>_<workerId>` | `clientId`+`lastMessageAt`, `workerId`+`lastMessageAt` | owners in `participants` |
-| `Message` | `id` | `chatId`+`sentAt` (`messagesByChat`) | owners in `participants` |
+| Model            | Identifier                     | Secondary indexes (query field)                                                                                                   | Read rule                                       |
+| ---------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `Profile`        | `userId`                       | –                                                                                                                                 | `authenticated`                                 |
+| `PrivateProfile` | `userId`                       | –                                                                                                                                 | `ownerDefinedIn('userId').identityClaim('sub')` |
+| `Service`        | `id`                           | `workerId` (`servicesByWorker`), `category` (`servicesByCategory`)                                                                | `authenticated`, `guest`                        |
+| `Booking`        | `id`                           | `clientId`+`startAt` (`bookingsByClient`), `workerId`+`startAt` (`bookingsByWorker`), `serviceId`+`startAt` (`bookingsByService`) | owner in `clientId`, owner in `workerId`        |
+| `Chat`           | `id` = `<clientId>_<workerId>` | `clientId`+`lastMessageAt`, `workerId`+`lastMessageAt`                                                                            | owners in `participants`                        |
+| `Message`        | `id`                           | `chatId`+`sentAt` (`messagesByChat`)                                                                                              | owners in `participants`                        |
 
 - Every rule is `.to(['read'])`; the schema-level `allow.resource(api)` is the only writer.
 - Subscriptions are disabled on every model except `Chat` and `Message`.
@@ -112,13 +112,13 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
 
 ## 6. Tests
 
-| File | Env | Covers |
-|---|---|---|
-| `tests/rules.test.ts` | node | every business rule and error code |
-| `tests/api.test.js` | node | error mapping, `unwrap`, locale key parity, every backend code translated |
+| File                      | Env   | Covers                                                                        |
+| ------------------------- | ----- | ----------------------------------------------------------------------------- |
+| `tests/rules.test.ts`     | node  | every business rule and error code                                            |
+| `tests/api.test.js`       | node  | error mapping, `unwrap`, locale key parity, every backend code translated     |
 | `tests/register.test.jsx` | jsdom | step validation, underage refusal, sign-up → confirm → profile, Cognito error |
-| `tests/login.test.jsx` | jsdom | sign-in, first sign-in with a new password (validated) |
-| `tests/book.test.jsx` | jsdom | total price, booking call, busy slot refused locally, backend rule message |
+| `tests/login.test.jsx`    | jsdom | sign-in, first sign-in with a new password (validated)                        |
+| `tests/book.test.jsx`     | jsdom | total price, booking call, busy slot refused locally, backend rule message    |
 
 Amplify, Cognito and the session are mocked at the module boundary (`vi.mock`); no test
 needs AWS.

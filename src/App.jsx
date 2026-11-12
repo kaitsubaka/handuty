@@ -28,7 +28,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={signUpOpen ? <Register /> : <Navigate to="/login" replace />} />
+        <Route
+          path="/register"
+          element={signUpOpen ? <Register /> : <Navigate to="/login" replace />}
+        />
         <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/home" element={signedIn(<Home />)} />
         <Route path="/services" element={signedIn(<Services />, ROLES.CLIENT)} />

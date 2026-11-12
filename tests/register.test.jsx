@@ -115,8 +115,14 @@ describe('Register', () => {
     await user.type(screen.getByLabelText(es.Code), '123456');
     await user.click(screen.getByRole('button', { name: es.Confirm }));
 
-    expect(auth.confirmSignUp).toHaveBeenCalledWith({ username: 'ana@example.com', confirmationCode: '123456' });
-    expect(auth.signIn).toHaveBeenCalledWith({ username: 'ana@example.com', password: 'Str0ng!Pass' });
+    expect(auth.confirmSignUp).toHaveBeenCalledWith({
+      username: 'ana@example.com',
+      confirmationCode: '123456',
+    });
+    expect(auth.signIn).toHaveBeenCalledWith({
+      username: 'ana@example.com',
+      password: 'Str0ng!Pass',
+    });
     expect(mutations.registerProfile).toHaveBeenCalledWith({
       name: 'Ana Pérez',
       role: 'WORKER',
@@ -130,7 +136,9 @@ describe('Register', () => {
   });
 
   it('shows a translated message when the email is taken', async () => {
-    auth.signUp.mockRejectedValue(Object.assign(new Error('exists'), { name: 'UsernameExistsException' }));
+    auth.signUp.mockRejectedValue(
+      Object.assign(new Error('exists'), { name: 'UsernameExistsException' }),
+    );
     const user = userEvent.setup();
     renderRegister();
     await fillAccount(user);

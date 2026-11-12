@@ -99,7 +99,9 @@ const schema = a
         index('clientId').sortKeys(['lastMessageAt']).queryField('chatsByClient'),
         index('workerId').sortKeys(['lastMessageAt']).queryField('chatsByWorker'),
       ])
-      .authorization((allow) => [allow.ownersDefinedIn('participants').identityClaim('sub').to(['read'])]),
+      .authorization((allow) => [
+        allow.ownersDefinedIn('participants').identityClaim('sub').to(['read']),
+      ]),
 
     Message: a
       .model({
@@ -109,8 +111,12 @@ const schema = a
         sentAt: a.datetime().required(),
         participants: a.id().required().array().required(),
       })
-      .secondaryIndexes((index) => [index('chatId').sortKeys(['sentAt']).queryField('messagesByChat')])
-      .authorization((allow) => [allow.ownersDefinedIn('participants').identityClaim('sub').to(['read'])]),
+      .secondaryIndexes((index) => [
+        index('chatId').sortKeys(['sentAt']).queryField('messagesByChat'),
+      ])
+      .authorization((allow) => [
+        allow.ownersDefinedIn('participants').identityClaim('sub').to(['read']),
+      ]),
 
     Slot: a.customType({
       startAt: a.datetime().required(),

@@ -4,14 +4,33 @@ import stepImage from '../../assets/Step2.svg';
 import { datePickerLocale } from '../../lib/datepicker';
 
 const FIELDS = [
-  { name: 'city', messageId: 'City', errorId: 'VerCity', type: 'text', autoComplete: 'address-level2' },
-  { name: 'address', messageId: 'Address', errorId: 'VerAdd', type: 'text', autoComplete: 'street-address' },
+  {
+    name: 'city',
+    messageId: 'City',
+    errorId: 'VerCity',
+    type: 'text',
+    autoComplete: 'address-level2',
+  },
+  {
+    name: 'address',
+    messageId: 'Address',
+    errorId: 'VerAdd',
+    type: 'text',
+    autoComplete: 'street-address',
+  },
   { name: 'phone', messageId: 'phone', errorId: 'VerPho', type: 'tel', autoComplete: 'tel' },
   { name: 'idNumber', messageId: 'idNumber', errorId: 'VerId', type: 'text', autoComplete: 'off' },
 ];
 
 /** Step 2 of the sign-up (and the "complete profile" form): personal data. */
-export default function PersonalStep({ form, errors, touched, onChange, onDateChange, titleId = 'Paso2' }) {
+export default function PersonalStep({
+  form,
+  errors,
+  touched,
+  onChange,
+  onDateChange,
+  titleId = 'Paso2',
+}) {
   const intl = useIntl();
   const show = (field) => touched && errors.has(field);
 

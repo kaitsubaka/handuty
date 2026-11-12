@@ -8,15 +8,18 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 ## v2.0 — Amplify Gen 2 migration
 
 ### Phase 0 — Documentation
+
 - [x] 0.1 `SPECS.md`: goal, decisions, use cases, business rules, data model, API, Free Tier guardrails
 - [x] 0.2 `ARCHITECTURE.md`, `CODESTYLE.md`, `TASKS.md`, `TODO.md`, `CHANGELOG.md`, `CLAUDE.md`, `README.md`
 
 ### Phase 1 — Repository
+
 - [x] 1.1 Branch `amplify-gen2`; Vite app at the root, `front/` flattened, `back/` (Express, Mongo, socket.io) removed
 - [x] 1.2 Assets, locales and CSS renamed to English paths; v1 pages under `Old/`, service worker and CRA files removed
 - [x] 1.3 `amplify.yml` for Amplify Hosting (pipeline-deploy, tests, build)
 
 ### Phase 2 — Backend
+
 - [x] 2.1 Auth: Cognito email sign-in with verification code
 - [x] 2.2 Data: `Profile`, `PrivateProfile`, `Service`, `Booking`, `Chat`, `Message`, indexes and read-only owner rules
 - [x] 2.3 `api` Lambda: 9 mutations + `busySlots`, rules in `rules.ts`
@@ -24,6 +27,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 - [x] 2.5 `tsc` clean except the `$amplify/env/api` module generated at deploy time
 
 ### Phase 3 — Front end
+
 - [x] 3.1 Vite + React 19 + Router 7 + Bootstrap 5 + react-intl; Amplify configured from `amplify_outputs.json`
 - [x] 3.2 Session context and route guards; sign-up in 3 steps with email code; complete-profile page
 - [x] 3.3 Landing with the workers-per-category chart (guest access)
@@ -37,9 +41,10 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 - [x] 3.11 Component tests (Register, Book) and helper tests; 52 tests green; production build green
 
 ### Phase 4 — Cloud
+
 - [x] 4.1 First cloud deploy through Amplify Hosting (us-east-1, branch `amplify-gen2`); the
-  local sandbox is optional and still needs AWS credentials on the machine (`TODO.md`)
+      local sandbox is optional and still needs AWS credentials on the machine (`TODO.md`)
 - [ ] 4.2 End-to-end check in the browser against the deployed app (both roles, chat between
-  two browsers)
+      two browsers)
 - [x] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
-  (USD 1/month)
+      (USD 1/month)

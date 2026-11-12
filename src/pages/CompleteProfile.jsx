@@ -13,7 +13,15 @@ import { personalErrors } from '../lib/validation';
 import './Login.css';
 import './Register.css';
 
-const EMPTY = { name: '', role: ROLES.CLIENT, city: '', address: '', phone: '', idNumber: '', birthDate: null };
+const EMPTY = {
+  name: '',
+  role: ROLES.CLIENT,
+  city: '',
+  address: '',
+  phone: '',
+  idNumber: '',
+  birthDate: null,
+};
 
 /** For a signed-in user without a profile (confirmed on another device, or creation failed). */
 export default function CompleteProfile() {
@@ -94,7 +102,13 @@ export default function CompleteProfile() {
                 <FormattedMessage id="SelectType" />
               </p>
             </label>
-            <select id="profile-role" name="role" className="form-control" value={form.role} onChange={handleChange}>
+            <select
+              id="profile-role"
+              name="role"
+              className="form-control"
+              value={form.role}
+              onChange={handleChange}
+            >
               <option value={ROLES.CLIENT}>{intl.formatMessage({ id: 'Client' })}</option>
               <option value={ROLES.WORKER}>{intl.formatMessage({ id: 'Worker' })}</option>
             </select>

@@ -27,7 +27,10 @@ export default function Sidebar() {
         <ul className="bar-items">
           {items.map((item) => (
             <li key={item.path} className="bar-text">
-              <NavLink to={item.path} style={({ isActive }) => (isActive ? { color: '#cccccc' } : undefined)}>
+              <NavLink
+                to={item.path}
+                style={({ isActive }) => (isActive ? { color: '#cccccc' } : undefined)}
+              >
                 <img className="iconItems" src={item.icon} alt="" />
                 <span>
                   <FormattedMessage id={item.messageId} />

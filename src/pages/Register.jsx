@@ -144,8 +144,18 @@ export default function Register() {
             <img className="logoRegistro" src={logo} alt="Handuty" />
           </h1>
           {step === 'account' && (
-            <form className="register-izq-inputs" noValidate onSubmit={(event) => event.preventDefault()}>
-              <AccountStep form={form} errors={errors} touched={touched} onChange={handleChange} onNext={handleNext} />
+            <form
+              className="register-izq-inputs"
+              noValidate
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <AccountStep
+                form={form}
+                errors={errors}
+                touched={touched}
+                onChange={handleChange}
+                onNext={handleNext}
+              />
             </form>
           )}
           {step === 'personal' && (
@@ -184,7 +194,11 @@ export default function Register() {
                 value={code}
                 onChange={(event) => setCode(event.target.value)}
               />
-              <button type="submit" className="botonRegister" disabled={sending || code.trim().length === 0}>
+              <button
+                type="submit"
+                className="botonRegister"
+                disabled={sending || code.trim().length === 0}
+              >
                 <span>
                   <FormattedMessage id="Confirm" />
                 </span>

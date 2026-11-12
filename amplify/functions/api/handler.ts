@@ -118,8 +118,10 @@ async function saveService(args: Args, { callerId }: Context) {
   assertServiceInput(input);
   const worker = await requireRole(callerId, 'WORKER');
   const own =
-    must('servicesByWorker', await client.models.Service.servicesByWorker({ workerId: callerId })) ??
-    [];
+    must(
+      'servicesByWorker',
+      await client.models.Service.servicesByWorker({ workerId: callerId }),
+    ) ?? [];
   const sameCategory = own.find(
     (service) => service.category === input.category && service.id !== input.id,
   );
@@ -152,7 +154,10 @@ async function saveService(args: Args, { callerId }: Context) {
 
 async function removeService(args: Args, { callerId, now }: Context) {
   const { id } = args as { id: string };
-  const service = found(must('getService', await client.models.Service.get({ id })), 'SERVICE_NOT_FOUND');
+  const service = found(
+    must('getService', await client.models.Service.get({ id })),
+    'SERVICE_NOT_FOUND',
+  );
   if (service.workerId !== callerId) {
     throw new RuleError('FORBIDDEN');
   }
@@ -229,7 +234,10 @@ async function busySlots(args: Args, { now }: Context) {
 
 async function cancelBooking(args: Args, { callerId, now }: Context) {
   const { id } = args as { id: string };
-  const booking = found(must('getBooking', await client.models.Booking.get({ id })), 'BOOKING_NOT_FOUND');
+  const booking = found(
+    must('getBooking', await client.models.Booking.get({ id })),
+    'BOOKING_NOT_FOUND',
+  );
   assertCanCancel(booking, callerId, now);
   must('deleteBooking', await client.models.Booking.delete({ id }));
   return id;
@@ -237,7 +245,10 @@ async function cancelBooking(args: Args, { callerId, now }: Context) {
 
 async function rateBooking(args: Args, { callerId, now }: Context) {
   const { id, rating } = args as { id: string; rating: number };
-  const booking = found(must('getBooking', await client.models.Booking.get({ id })), 'BOOKING_NOT_FOUND');
+  const booking = found(
+    must('getBooking', await client.models.Booking.get({ id })),
+    'BOOKING_NOT_FOUND',
+  );
   assertCanRate(booking, callerId, rating, now);
   const rated = must('updateBooking', await client.models.Booking.update({ id, rating }));
   const service = must('getService', await client.models.Service.get({ id: booking.serviceId }));
@@ -284,7 +295,10 @@ async function openChat(args: Args, { callerId, now }: Context) {
 async function sendMessage(args: Args, { callerId, now }: Context) {
   const { chatId, content } = args as { chatId: string; content: string };
   const text = normalizeMessage(content);
-  const chat = found(must('getChat', await client.models.Chat.get({ id: chatId })), 'CHAT_NOT_FOUND');
+  const chat = found(
+    must('getChat', await client.models.Chat.get({ id: chatId })),
+    'CHAT_NOT_FOUND',
+  );
   if (!chat.participants.includes(callerId)) {
     throw new RuleError('FORBIDDEN');
   }

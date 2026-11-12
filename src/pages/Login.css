@@ -1,204 +1,204 @@
 .login {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .registro {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .login-der {
-    width: 50vw;
-    display: flex;
-    flex-flow: column;
-    text-align: center;
-    color: #373842;
+  width: 50vw;
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  color: #373842;
 }
 
 .slogan {
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    margin-left: 6vw;
-    margin-right: 6vw;
-    background-color: white;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  margin-left: 6vw;
+  margin-right: 6vw;
+  background-color: white;
 }
 
 .slogan h2 {
-    font-family: "Righteous";
-    font-size: 1.2rem;
+  font-family: 'Righteous';
+  font-size: 1.2rem;
 }
 
 .slogan span {
-    color: #373842;
+  color: #373842;
 }
 
 .ilLogin {
-    align-self: flex-end;
-    width: 50vw;
+  align-self: flex-end;
+  width: 50vw;
 }
 
 .login-izq {
-    width: 50vw;
-    background-color: #373842;
-    display: flex;
-    justify-content: center;
+  width: 50vw;
+  background-color: #373842;
+  display: flex;
+  justify-content: center;
 }
 
 .login-izq-content {
-    width: 25vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .logoLogin {
-    width: 10rem;
+  width: 10rem;
 }
 
 .logoRegistro {
-    width: 7rem;
+  width: 7rem;
 }
 
 .login-izq-inputs {
-    margin-top: 5vh;
+  margin-top: 5vh;
 }
 
 .login-izq-inputs p {
-    margin-top: 3vh;
-    color: #FFFFFF;
-    font-family: "Open Sans";
-    margin-bottom: 2px;
+  margin-top: 3vh;
+  color: #ffffff;
+  font-family: 'Open Sans';
+  margin-bottom: 2px;
 }
 
 .login-izq-inputs input {
-    width: 28vw;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #FFFFFF;
-    color: #CCCCCC;
-    font-family: "Open Sans";
+  width: 28vw;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  color: #cccccc;
+  font-family: 'Open Sans';
 }
 
 .login-izq-inputs input:focus {
-    outline: none;
+  outline: none;
 }
 
 .login-izq-inputs select {
-    margin-top: 1vh;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #FFFFFF;
-    color: #FFFFFF;
-    font-family: "Open Sans";
+  margin-top: 1vh;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+  font-family: 'Open Sans';
 }
 
-.login-izq-inputs option{
-    color:#373842 !important;
+.login-izq-inputs option {
+  color: #373842 !important;
 }
 
 .login-izq-inputs select:focus {
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #FFFFFF;
-    outline: none !important;
-    outline-width: 0 !important;
-    color: #FFFFFF;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #ffffff;
+  outline: none !important;
+  outline-width: 0 !important;
+  color: #ffffff;
 }
 
 .login-izq-inputs input:-webkit-autofill,
 .login-izq-inputs input:-webkit-autofill:hover,
 .login-izq-inputs input:-webkit-autofill:focus,
 .login-izq-inputs input:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px #373842 inset !important;
-    -webkit-text-fill-color: #CCCCCC !important;
-    -webkit-text-fill-font-family: "Open Sans" !important;
+  box-shadow: 0 0 0 30px #373842 inset !important;
+  -webkit-text-fill-color: #cccccc !important;
+  -webkit-text-fill-font-family: 'Open Sans' !important;
 }
 
 .login-izq-inputs input:-moz-autofill,
 .login-izq-inputs input:-moz-autofill:hover,
 .login-izq-inputs input:-moz-autofill:focus,
 .login-izq-inputs input:-moz-autofill:active {
-    box-shadow: 0 0 0 30px #373842 inset !important;
-    -moz-text-fill-color: #CCCCCC !important;
-    -moz-text-fill-font-family: "Open Sans" !important;
+  box-shadow: 0 0 0 30px #373842 inset !important;
+  -moz-text-fill-color: #cccccc !important;
+  -moz-text-fill-font-family: 'Open Sans' !important;
 }
 
 .contrasena {
-    display: flex;
+  display: flex;
 }
 
 .contrasena input {
-    width: 14vw !important;
+  width: 14vw !important;
 }
 
 .bloque {
-    display: flex;
-    flex-direction: column;
-    margin-right: 2vw;
+  display: flex;
+  flex-direction: column;
+  margin-right: 2vw;
 }
 
 .botonLogin {
-    width: inherit;
-    background-color: #fdaa46;
-    border-radius: 5px;
-    border-width: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6vh;
-    padding: 0.5rem;
+  width: inherit;
+  background-color: #fdaa46;
+  border-radius: 5px;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6vh;
+  padding: 0.5rem;
 }
 
 .botonLogin span {
-    color: #373842;
-    font-family: "Open Sans";
-    font-weight: 600;
-    font-size: 18px;
+  color: #373842;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .botonLogin span:hover {
-    text-decoration: none;
-    color: #FFFFFF;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .preguntaRegistro {
-    margin-top: 3vh;
+  margin-top: 3vh;
 }
 
 .preguntaRegistro p {
-    color: #FFFFFF;
-    font-family: "Open Sans";
+  color: #ffffff;
+  font-family: 'Open Sans';
 }
 
 .preguntaRegistro span {
-    color: #A3CAF7;
-    font-family: "Open Sans";
+  color: #a3caf7;
+  font-family: 'Open Sans';
 }
 
 .preguntaRegistro a:hover {
-    text-decoration-color: #A3CAF7;
+  text-decoration-color: #a3caf7;
 }
 
 .registro .login-izq-content {
-    width: 30vw !important;
+  width: 30vw !important;
 }
 
 .registro .login-izq-inputs {
-    margin-top: 2.5vh;
-    width: 30vw;
+  margin-top: 2.5vh;
+  width: 30vw;
 }
 
 .registro .login-izq-inputs input {
-    width: 30vw;
+  width: 30vw;
 }
 
 .registro select {
-    margin-top: 1.5vh !important;
+  margin-top: 1.5vh !important;
 }
 
 /*@media (max-height: 700px) {
@@ -210,7 +210,6 @@
     }
 }*/
 
-
-.invalid-feedback{
-    color: #ff7c89 !important;
+.invalid-feedback {
+  color: #ff7c89 !important;
 }

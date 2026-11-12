@@ -15,15 +15,15 @@ starts in `SPECS.md` and ends in tests and `CHANGELOG.md`.
 
 ## Stack
 
-| Layer | Technology |
-|---|---|
-| Front end | React 19, Vite, React Router 7, Bootstrap 5, react-intl (es/en), d3 |
-| Auth | Amazon Cognito (email + verification code), guest access for the landing chart |
-| API | AWS AppSync (GraphQL) with owner-based authorization and live subscriptions |
-| Data | Amazon DynamoDB (6 models, secondary indexes) |
-| Business logic | One AWS Lambda (Node 22, arm64) for every write, pure rules with unit tests |
-| Infrastructure | AWS Amplify Gen 2 (TypeScript, code-first), Amplify Hosting |
-| Tests | Vitest + Testing Library (52 tests, no AWS needed) |
+| Layer          | Technology                                                                     |
+| -------------- | ------------------------------------------------------------------------------ |
+| Front end      | React 19, Vite, React Router 7, Bootstrap 5, react-intl (es/en), d3            |
+| Auth           | Amazon Cognito (email + verification code), guest access for the landing chart |
+| API            | AWS AppSync (GraphQL) with owner-based authorization and live subscriptions    |
+| Data           | Amazon DynamoDB (6 models, secondary indexes)                                  |
+| Business logic | One AWS Lambda (Node 22, arm64) for every write, pure rules with unit tests    |
+| Infrastructure | AWS Amplify Gen 2 (TypeScript, code-first), Amplify Hosting                    |
+| Tests          | Vitest + Testing Library (52 tests, no AWS needed)                             |
 
 ```
 Browser ── reads ──► AppSync ──► DynamoDB        (owner rules decide what each user sees)

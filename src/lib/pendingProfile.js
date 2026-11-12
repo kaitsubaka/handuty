@@ -13,7 +13,15 @@ export function savePendingProfile(profile) {
   try {
     sessionStorage.setItem(
       KEY,
-      JSON.stringify({ name, role, city, address, phone, idNumber, birthDate: toAwsDate(birthDate) }),
+      JSON.stringify({
+        name,
+        role,
+        city,
+        address,
+        phone,
+        idNumber,
+        birthDate: toAwsDate(birthDate),
+      }),
     );
   } catch (error) {
     console.warn('[profile] could not keep the pending profile', error);

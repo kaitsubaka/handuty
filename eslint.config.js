@@ -10,7 +10,11 @@ export default tseslint.config(
   { ignores: ['dist', 'coverage', '.amplify', 'amplify_outputs*.json'] },
   {
     files: ['src/**/*.{js,jsx}', 'tests/**/*.{js,jsx}'],
-    extends: [js.configs.recommended, react.configs.flat.recommended, react.configs.flat['jsx-runtime']],
+    extends: [
+      js.configs.recommended,
+      react.configs.flat.recommended,
+      react.configs.flat['jsx-runtime'],
+    ],
     plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
     languageOptions: { globals: globals.browser },
     settings: { react: { version: 'detect' } },

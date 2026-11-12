@@ -16,7 +16,9 @@ export default function Search() {
 
   useEffect(() => {
     run(client.models.Service.list({ selectionSet: ['workerName'], limit: 1000 }))
-      .then((services) => setWorkerNames([...new Set(services.map((service) => service.workerName))]))
+      .then((services) =>
+        setWorkerNames([...new Set(services.map((service) => service.workerName))]),
+      )
       .catch((error) => console.warn('[search] could not load worker names', error));
   }, []);
 
@@ -52,7 +54,11 @@ export default function Search() {
         search();
       }}
     >
-      <button type="submit" className="searchBarBut" aria-label={intl.formatMessage({ id: 'Search' })}>
+      <button
+        type="submit"
+        className="searchBarBut"
+        aria-label={intl.formatMessage({ id: 'Search' })}
+      >
         <img className="searchIcon" src={searchIcon} alt="" />
       </button>
       <input

@@ -38,7 +38,11 @@ function BookingCard({ booking, isClient, past, onMessage, onCancel, onRate }) {
               </p>
             </div>
             <div>
-              <img className="imgTrabajadorCitas" src={isClient ? workerAvatar : clientAvatar} alt="" />
+              <img
+                className="imgTrabajadorCitas"
+                src={isClient ? workerAvatar : clientAvatar}
+                alt=""
+              />
             </div>
             <div className="bloqueTrabajadorCitas">
               <h3>{isClient ? booking.workerName : booking.clientName}</h3>
@@ -48,11 +52,22 @@ function BookingCard({ booking, isClient, past, onMessage, onCancel, onRate }) {
             </div>
             <div className="bloqueTextoCitas">
               <h3>
-                <FormattedDate value={booking.startAt} year="numeric" month="short" day="numeric" weekday="short" />
+                <FormattedDate
+                  value={booking.startAt}
+                  year="numeric"
+                  month="short"
+                  day="numeric"
+                  weekday="short"
+                />
               </h3>
               <p>{booking.address}</p>
               <p>
-                <FormattedNumber value={booking.price} style="currency" currency="COP" maximumFractionDigits={0} />
+                <FormattedNumber
+                  value={booking.price}
+                  style="currency"
+                  currency="COP"
+                  maximumFractionDigits={0}
+                />
               </p>
             </div>
           </div>
@@ -78,7 +93,11 @@ function BookingCard({ booking, isClient, past, onMessage, onCancel, onRate }) {
                   booking.rating
                 ) : isClient && finished ? (
                   <div className="div-button-calificar">
-                    <button type="button" className="btn btn-calificacion" onClick={() => onRate(booking)}>
+                    <button
+                      type="button"
+                      className="btn btn-calificacion"
+                      onClick={() => onRate(booking)}
+                    >
                       <FormattedMessage id="Calificar" />
                     </button>
                   </div>
@@ -128,7 +147,9 @@ export default function Appointments() {
 
   async function handleMessage(booking) {
     if (!isClient) {
-      navigate(`/messages?chat=${encodeURIComponent(chatIdFor(booking.clientId, booking.workerId))}`);
+      navigate(
+        `/messages?chat=${encodeURIComponent(chatIdFor(booking.clientId, booking.workerId))}`,
+      );
       return;
     }
     try {

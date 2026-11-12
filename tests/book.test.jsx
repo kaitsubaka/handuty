@@ -96,7 +96,9 @@ describe('Book', () => {
     start.setSeconds(0, 0);
     start.setMinutes(start.getMinutes() < 30 ? 30 : 60);
     const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
-    api.busySlots.mockResolvedValue({ data: [{ startAt: start.toISOString(), endAt: end.toISOString() }] });
+    api.busySlots.mockResolvedValue({
+      data: [{ startAt: start.toISOString(), endAt: end.toISOString() }],
+    });
     const user = userEvent.setup();
     renderBook();
     await screen.findByText('Juan Gómez');

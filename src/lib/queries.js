@@ -19,7 +19,9 @@ export async function all(query) {
 /** Bookings of the signed-in user, upcoming (soonest first) or past (latest first). */
 export function myBookings(session, { upcoming }) {
   const isClient = session.profile.role === ROLES.CLIENT;
-  const index = isClient ? client.models.Booking.bookingsByClient : client.models.Booking.bookingsByWorker;
+  const index = isClient
+    ? client.models.Booking.bookingsByClient
+    : client.models.Booking.bookingsByWorker;
   const key = isClient ? { clientId: session.userId } : { workerId: session.userId };
   const now = nowIso();
   return all((nextToken) =>
@@ -40,6 +42,9 @@ export function myChats(session) {
 
 export function myServices(session) {
   return all((nextToken) =>
-    client.models.Service.servicesByWorker({ workerId: session.userId }, { limit: PAGE, nextToken }),
+    client.models.Service.servicesByWorker(
+      { workerId: session.userId },
+      { limit: PAGE, nextToken },
+    ),
   );
 }

@@ -1,263 +1,259 @@
 .serviciosDetail {
-    margin-left: 270px;
-    width: 100vw;
+  margin-left: 270px;
+  width: 100vw;
 }
 
 .mainServiciosDetail {
-    margin-left: 6vw;
+  margin-left: 6vw;
 }
 
 .serviceDetailTitle {
-    display: flex;
-    align-items: center;
-    margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  margin-top: 5vh;
 }
 
 .arrowImg {
-    width: 2.3rem;
+  width: 2.3rem;
 }
 
 .serviceDetailTitle h2 {
-    font-size: 28px;
-    font-family: "Righteous";
-    color: #d17b11;
-    margin-left: 2vw;
+  font-size: 28px;
+  font-family: 'Righteous';
+  color: #d17b11;
+  margin-left: 2vw;
 }
 
 .mainServiciosDetail .card {
-    width: 240px;
-    height: fit-content;
-    margin: 3vw;
+  width: 240px;
+  height: fit-content;
+  margin: 3vw;
 }
 
 .cardDetail {
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    border-radius: 20px !important;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  border-radius: 20px !important;
 }
 
 .cardDetail:hover {
-    border-color: #A3CAF7;
+  border-color: #a3caf7;
 }
 
 .cardDetail-nombre {
-    display: flex;
-    align-items: center;
-    margin-top: 1.5vh;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5vh;
 }
-.cardDetail-nombre-det{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 22px;
+.cardDetail-nombre-det {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 22px;
 }
 
 .cardDetail-nombre p {
-    font-family: "Righteous";
-    color: #373842;
-    margin-bottom: 0;
-    word-wrap: break-word;
-    width: 100px;
-    text-align: start !important;
+  font-family: 'Righteous';
+  color: #373842;
+  margin-bottom: 0;
+  word-wrap: break-word;
+  width: 100px;
+  text-align: start !important;
 }
 .cardDetail-nombre span {
-    font-family: "Open Sans";
-    color: #373842;
-    font-size: 0.8rem;
+  font-family: 'Open Sans';
+  color: #373842;
+  font-size: 0.8rem;
 }
 
 .imgTrabajadorDetail {
-    margin-left: 12px;
-    width: 3rem;
-    border-radius: 50%;
+  margin-left: 12px;
+  width: 3rem;
+  border-radius: 50%;
 }
 
 .cardDetail-datos {
-    margin-left: 0.8rem;
+  margin-left: 0.8rem;
 }
 
 .cardDetail-datos p {
-    font-family: "Open Sans";
-    font-size: 14px;
-    color: #373842;
-    margin-bottom: 0;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: #373842;
+  margin-bottom: 0;
 }
 
 .cardDetail-datos-primera {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
 }
 
 .cardDetail-datos-segunda {
-    display: flex;
+  display: flex;
 }
 
 .cardDetail-datos-primera p {
-    margin-left: 10px;
-    margin-right: 12px;
+  margin-left: 10px;
+  margin-right: 12px;
 }
 
 .buttonCita {
-    background-color: #373842;
-    margin-top: 20px;
-    margin-left: 19px;
-    margin-right: 10px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 20px;
+  background-color: #373842;
+  margin-top: 20px;
+  margin-left: 19px;
+  margin-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
 }
 
 .buttonCita a {
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: normal;
-    color: white;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-weight: normal;
+  color: white;
 }
 
 .buttonCita a:hover {
-    text-decoration: none;
-    color: #a2a2a2;
+  text-decoration: none;
+  color: #a2a2a2;
 }
 
 .buttonCita p {
-    margin-bottom: 0;
-
+  margin-bottom: 0;
 }
 
-
 @media (min-width: 1600px) {
-    .serviciosDetail {
-        margin-left: 310px;
-    }
+  .serviciosDetail {
+    margin-left: 310px;
+  }
 
-    .mainServiciosDetail {
-        margin-left: 8vw;
-    }
+  .mainServiciosDetail {
+    margin-left: 8vw;
+  }
 }
 
 @media (max-width: 700px) {
-    .mainServiciosDetail {
-        margin-left: 10vw;
-    }
-
+  .mainServiciosDetail {
+    margin-left: 10vw;
+  }
 }
 
-.servicioDetailBar{
-    display: flex;
-    margin-top: 5vh;
-    align-items: center;
+.servicioDetailBar {
+  display: flex;
+  margin-top: 5vh;
+  align-items: center;
 }
 
-.servicioDetailBar p{
-    margin-bottom: 0;
-    font-family: "Open Sans";
-    color: #373842;
+.servicioDetailBar p {
+  margin-bottom: 0;
+  font-family: 'Open Sans';
+  color: #373842;
 }
 
-.servicioDetailBar a{
-    color: #373842;
+.servicioDetailBar a {
+  color: #373842;
 }
-.servicioDetailBar a:hover{
-    text-decoration-color: #373842;
-}
-
-.triangle{
-    height: 9px;
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
+.servicioDetailBar a:hover {
+  text-decoration-color: #373842;
 }
 
-.serviceDetailCont{
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
+.triangle {
+  height: 9px;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+}
+
+.serviceDetailCont {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .emptyPageDet {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20vh;
-
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20vh;
 }
 
 .emptyPageDet p {
-    font-family: "Open Sans";
-    color: #373842;
-    font-size: 0.8rem;
-    margin-top: 1vh;
+  font-family: 'Open Sans';
+  color: #373842;
+  font-size: 0.8rem;
+  margin-top: 1vh;
 }
 
 .emptyPageDet-bold {
-    font-weight: 600;
-    margin-top: 2vh;
-    margin-bottom: 1vh;
-    font-size: 1rem !important;
+  font-weight: 600;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-size: 1rem !important;
 }
 
-.serviciosFilter{
-    margin-left: 3vw;
+.serviciosFilter {
+  margin-left: 3vw;
 }
 
-.serviciosFilter-tit{
-    margin-bottom: 1vh;
-    margin-top: 5vh;
-    font-family: "Open Sans";
-    font-weight: 600;
-    color: #373842;
+.serviciosFilter-tit {
+  margin-bottom: 1vh;
+  margin-top: 5vh;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  color: #373842;
 }
 
-.serviciosFilter select{
-    color: #373842;
-    font-family: "Open Sans";
-    width: 17vw;
-    height: 5vh;
-    border: none;
-    background-color: #F4F2F2;
-    border-radius: 20px;
-    padding-left: 15px;
-    padding-right: 10px;
+.serviciosFilter select {
+  color: #373842;
+  font-family: 'Open Sans';
+  width: 17vw;
+  height: 5vh;
+  border: none;
+  background-color: #f4f2f2;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 10px;
 }
 
-.serviciosFilter-det{
-    display: flex;
-    margin-top: 2vh;
+.serviciosFilter-det {
+  display: flex;
+  margin-top: 2vh;
 }
 
-.serviciosFilter-det button{
-    background-color: transparent;
-    border: none;
-    font-family: "Open Sans";
-    color: #373842;
-    margin-left: 3vw;
+.serviciosFilter-det button {
+  background-color: transparent;
+  border: none;
+  font-family: 'Open Sans';
+  color: #373842;
+  margin-left: 3vw;
 }
 
-.serviciosFilter-det button:hover{
-    color: #a2a2a2;
+.serviciosFilter-det button:hover {
+  color: #a2a2a2;
 }
 
 .cardDetail-descripcion {
-    font-family: "Open Sans";
-    font-size: 0.85rem;
-    color: #555;
-    margin: 1vh 0 0;
+  font-family: 'Open Sans';
+  font-size: 0.85rem;
+  color: #555;
+  margin: 1vh 0 0;
 }
 
 .buttonMessage {
-    border: none;
-    background: none;
-    font-family: "Open Sans";
-    font-size: 0.85rem;
-    color: #373842;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-top: 1vh;
+  border: none;
+  background: none;
+  font-family: 'Open Sans';
+  font-size: 0.85rem;
+  color: #373842;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1vh;
 }

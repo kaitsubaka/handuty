@@ -43,7 +43,15 @@ function EmptyCard({ titleId, image, lines, linkTo, linkId }) {
         <img className="emptyCitaIcon" src={image} alt="" />
         <div className="emptyHome">
           {lines.map((id, index) => (
-            <p key={id}>{index === 0 ? <span><FormattedMessage id={id} /></span> : <FormattedMessage id={id} />}</p>
+            <p key={id}>
+              {index === 0 ? (
+                <span>
+                  <FormattedMessage id={id} />
+                </span>
+              ) : (
+                <FormattedMessage id={id} />
+              )}
+            </p>
           ))}
         </div>
       </div>
@@ -86,11 +94,16 @@ function UpcomingBookings({ bookings, isClient }) {
                   <FormattedTime value={booking.startAt} />
                 </h3>
                 <p>
-                  {durationMinutes(booking.startAt, booking.endAt)} <FormattedMessage id="Minutes" />
+                  {durationMinutes(booking.startAt, booking.endAt)}{' '}
+                  <FormattedMessage id="Minutes" />
                 </p>
               </div>
               <div>
-                <img className="imgTrabajador" src={isClient ? workerAvatar : clientAvatar} alt="" />
+                <img
+                  className="imgTrabajador"
+                  src={isClient ? workerAvatar : clientAvatar}
+                  alt=""
+                />
               </div>
               <div className="bloqueTexto1">
                 <h3>{isClient ? booking.workerName : booking.clientName}</h3>
@@ -100,7 +113,13 @@ function UpcomingBookings({ bookings, isClient }) {
               </div>
               <div className="bloqueTexto2">
                 <h3>
-                  <FormattedDate value={booking.startAt} year="numeric" month="short" day="numeric" weekday="short" />
+                  <FormattedDate
+                    value={booking.startAt}
+                    year="numeric"
+                    month="short"
+                    day="numeric"
+                    weekday="short"
+                  />
                 </h3>
                 <p>{booking.address}</p>
               </div>
@@ -207,7 +226,11 @@ function FeaturedCategories() {
       </p>
       <div className="mainHome-der-oferta">
         {FEATURED.map((item) => (
-          <Link key={item.key} className="row serItem" to={`/services/results?category=${item.key}`}>
+          <Link
+            key={item.key}
+            className="row serItem"
+            to={`/services/results?category=${item.key}`}
+          >
             <img className="imgSerHome" src={item.image} alt="" />
             <p>
               <FormattedMessage id={categoryMessageId(item.key)} />
@@ -287,7 +310,11 @@ export default function Home() {
               </>
             )}
           </div>
-          {isClient ? <FeaturedCategories /> : <WorkerServices name={session.profile.name} services={services} />}
+          {isClient ? (
+            <FeaturedCategories />
+          ) : (
+            <WorkerServices name={session.profile.name} services={services} />
+          )}
         </div>
       </div>
     </AppLayout>

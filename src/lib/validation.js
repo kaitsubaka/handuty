@@ -58,10 +58,7 @@ export function personalErrors(form) {
 }
 
 export function loginErrors(form) {
-  return fieldsWithErrors(
-    Joi.object({ email, password: Joi.string().min(1).required() }),
-    form,
-  );
+  return fieldsWithErrors(Joi.object({ email, password: Joi.string().min(1).required() }), form);
 }
 
 /** First sign-in of an account created in Cognito: the new password and its repetition. */

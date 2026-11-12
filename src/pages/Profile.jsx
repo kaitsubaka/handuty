@@ -118,7 +118,10 @@ function WorkerServices({ session }) {
       });
   }, [session]);
 
-  const takenCategories = useMemo(() => (services ?? []).map((service) => service.category), [services]);
+  const takenCategories = useMemo(
+    () => (services ?? []).map((service) => service.category),
+    [services],
+  );
 
   function handleSaved(saved) {
     setServices((current) =>
@@ -167,22 +170,40 @@ function WorkerServices({ session }) {
             </p>
             <div className="servicioDetailIconos">
               <button type="button" className="iconButton" onClick={() => setEditing(service)}>
-                <img className="iconPerfil" src={editIcon} alt={intl.formatMessage({ id: 'EditServ' })} />
+                <img
+                  className="iconPerfil"
+                  src={editIcon}
+                  alt={intl.formatMessage({ id: 'EditServ' })}
+                />
               </button>
               <button type="button" className="iconButton" onClick={() => handleDelete(service)}>
-                <img className="iconPerfil" src={deleteIcon} alt={intl.formatMessage({ id: 'DeleteServ' })} />
+                <img
+                  className="iconPerfil"
+                  src={deleteIcon}
+                  alt={intl.formatMessage({ id: 'DeleteServ' })}
+                />
               </button>
             </div>
           </div>
           <p className="servicioDetailPerfil-descripcion">{service.description}</p>
           <div className="servicioDetailPerfil-segunda">
-            <img className="iconPerfil" src={ratingIcon} alt={intl.formatMessage({ id: 'Rating' })} />
+            <img
+              className="iconPerfil"
+              src={ratingIcon}
+              alt={intl.formatMessage({ id: 'Rating' })}
+            />
             <p>{service.rating ?? '-'}</p>
             <p className="costo">
               <FormattedMessage id="Cost" />
             </p>
             <p>
-              <FormattedNumber value={service.pricePerHour} style="currency" currency="COP" maximumFractionDigits={0} />/
+              <FormattedNumber
+                value={service.pricePerHour}
+                style="currency"
+                currency="COP"
+                maximumFractionDigits={0}
+              />
+              /
               <FormattedMessage id="Hour" />
             </p>
           </div>
@@ -242,20 +263,39 @@ export default function Profile() {
               </p>
               <div className="perfil-main-informacionDetail">
                 <p>
-                  <span><FormattedMessage id="Tel" /></span> {privateProfile.phone}
+                  <span>
+                    <FormattedMessage id="Tel" />
+                  </span>{' '}
+                  {privateProfile.phone}
                 </p>
                 <p>
-                  <span><FormattedMessage id="idNumber" /></span> {privateProfile.idNumber}
+                  <span>
+                    <FormattedMessage id="idNumber" />
+                  </span>{' '}
+                  {privateProfile.idNumber}
                 </p>
                 <p>
-                  <span><FormattedMessage id="FecNac" /></span>{' '}
-                  <FormattedDate value={fromAwsDate(privateProfile.birthDate)} year="numeric" month="short" day="numeric" />
+                  <span>
+                    <FormattedMessage id="FecNac" />
+                  </span>{' '}
+                  <FormattedDate
+                    value={fromAwsDate(privateProfile.birthDate)}
+                    year="numeric"
+                    month="short"
+                    day="numeric"
+                  />
                 </p>
                 <p>
-                  <span><FormattedMessage id="City" /></span> {profile.city}
+                  <span>
+                    <FormattedMessage id="City" />
+                  </span>{' '}
+                  {profile.city}
                 </p>
                 <p>
-                  <span><FormattedMessage id="Address" /></span> {privateProfile.address}
+                  <span>
+                    <FormattedMessage id="Address" />
+                  </span>{' '}
+                  {privateProfile.address}
                 </p>
               </div>
             </div>

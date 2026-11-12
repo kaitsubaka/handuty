@@ -11,7 +11,9 @@ export default function ChatMessage({ message, own, senderIsWorker }) {
         <img className="messageImg" src={senderIsWorker ? workerAvatar : clientAvatar} alt="" />
         <p className="messageText">{message.content}</p>
       </div>
-      <div className="messageBottom">{format(message.sentAt, locale === 'en' ? 'en_US' : 'es')}</div>
+      <div className="messageBottom">
+        {format(message.sentAt, locale === 'en' ? 'en_US' : 'es')}
+      </div>
     </div>
   );
 }

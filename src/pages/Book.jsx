@@ -40,7 +40,9 @@ export default function Book() {
       .then(([loaded, slots]) => {
         if (active) {
           setService(loaded);
-          setBusy(slots.map((slot) => ({ start: new Date(slot.startAt), end: new Date(slot.endAt) })));
+          setBusy(
+            slots.map((slot) => ({ start: new Date(slot.startAt), end: new Date(slot.endAt) })),
+          );
         }
       })
       .catch((error) => {
@@ -57,7 +59,10 @@ export default function Book() {
   const isFree = useCallback(
     (slot) => {
       const end = new Date(slot.getTime() + duration * MINUTE_MS);
-      return slot > new Date() && !busy.some((booking) => overlaps(slot, end, booking.start, booking.end));
+      return (
+        slot > new Date() &&
+        !busy.some((booking) => overlaps(slot, end, booking.start, booking.end))
+      );
     },
     [busy, duration],
   );
@@ -70,7 +75,13 @@ export default function Book() {
     }
     setSending(true);
     try {
-      await run(client.mutations.bookService({ serviceId, startAt: startAt.toISOString(), durationMinutes: duration }));
+      await run(
+        client.mutations.bookService({
+          serviceId,
+          startAt: startAt.toISOString(),
+          durationMinutes: duration,
+        }),
+      );
       setBooked(true);
     } catch (error) {
       setErrorId(errorMessageId(error));
@@ -130,15 +141,30 @@ export default function Book() {
         <div className="formServicio-detail-cont">
           <div className="formServicio-detail">
             <dl className="formServicio-detail-bloc">
-              <dt><FormattedMessage id="Worker" /></dt>
+              <dt>
+                <FormattedMessage id="Worker" />
+              </dt>
               <dd>{service.workerName}</dd>
-              <dt><FormattedMessage id="Category" /></dt>
-              <dd><FormattedMessage id={categoryMessageId(service.category)} /></dd>
-              <dt><FormattedMessage id="PriceHour" /></dt>
+              <dt>
+                <FormattedMessage id="Category" />
+              </dt>
               <dd>
-                <FormattedNumber value={service.pricePerHour} style="currency" currency="COP" maximumFractionDigits={0} />
+                <FormattedMessage id={categoryMessageId(service.category)} />
               </dd>
-              <dt><FormattedMessage id="Total" /></dt>
+              <dt>
+                <FormattedMessage id="PriceHour" />
+              </dt>
+              <dd>
+                <FormattedNumber
+                  value={service.pricePerHour}
+                  style="currency"
+                  currency="COP"
+                  maximumFractionDigits={0}
+                />
+              </dd>
+              <dt>
+                <FormattedMessage id="Total" />
+              </dt>
               <dd>
                 <FormattedNumber
                   value={Math.round((service.pricePerHour * duration) / 60)}
@@ -147,7 +173,9 @@ export default function Book() {
                   maximumFractionDigits={0}
                 />
               </dd>
-              <dt><FormattedMessage id="Address" /></dt>
+              <dt>
+                <FormattedMessage id="Address" />
+              </dt>
               <dd>{privateProfile?.address}</dd>
             </dl>
             <p className="formServicio-description">{service.description}</p>

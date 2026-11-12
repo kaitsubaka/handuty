@@ -43,7 +43,9 @@ export default function ServiceResults() {
   const intl = useIntl();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const category = CATEGORIES.some((item) => item.key === params.get('category')) ? params.get('category') : null;
+  const category = CATEGORIES.some((item) => item.key === params.get('category'))
+    ? params.get('category')
+    : null;
   const text = params.get('q')?.trim().toLowerCase() ?? '';
   const [loaded, setLoaded] = useState({ category: undefined, services: null, failed: false });
   const { services, failed } =
@@ -73,13 +75,18 @@ export default function ServiceResults() {
     }
     const priceRange = PRICE_RANGES.find((item) => item.id === range);
     const matches = services.filter((service) => {
-      if (priceRange && (service.pricePerHour < priceRange.min || service.pricePerHour >= priceRange.max)) {
+      if (
+        priceRange &&
+        (service.pricePerHour < priceRange.min || service.pricePerHour >= priceRange.max)
+      ) {
         return false;
       }
       if (!text) {
         return true;
       }
-      const categoryName = intl.formatMessage({ id: categoryMessageId(service.category) }).toLowerCase();
+      const categoryName = intl
+        .formatMessage({ id: categoryMessageId(service.category) })
+        .toLowerCase();
       return categoryName.includes(text) || service.workerName.toLowerCase().includes(text);
     });
     return sort ? [...matches].sort(SORTS[sort]) : matches;
@@ -129,7 +136,12 @@ export default function ServiceResults() {
                 <FormattedMessage id="FilterBy" />
               </label>
               <div className="serviciosFilter-det">
-                <select id="priceFilter" className="form-select" value={range} onChange={(event) => setRange(event.target.value)}>
+                <select
+                  id="priceFilter"
+                  className="form-select"
+                  value={range}
+                  onChange={(event) => setRange(event.target.value)}
+                >
                   <option value="">{intl.formatMessage({ id: 'PriceHour' })}</option>
                   {PRICE_RANGES.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -144,7 +156,12 @@ export default function ServiceResults() {
                 <FormattedMessage id="OrderBy" />
               </label>
               <div className="serviciosFilter-det">
-                <select id="sortBy" className="form-select" value={sort} onChange={(event) => setSort(event.target.value)}>
+                <select
+                  id="sortBy"
+                  className="form-select"
+                  value={sort}
+                  onChange={(event) => setSort(event.target.value)}
+                >
                   <option value="">{intl.formatMessage({ id: 'Caracteristica' })}</option>
                   <option value="name">{intl.formatMessage({ id: 'Nombre' })}</option>
                   <option value="price">{intl.formatMessage({ id: 'Precio' })}</option>
@@ -186,16 +203,29 @@ export default function ServiceResults() {
                       <hr />
                       <div className="cardDetail-datos">
                         <div className="cardDetail-datos-primera">
-                          <img className="detailIcon" src={ratingIcon} alt={intl.formatMessage({ id: 'Rating' })} />
+                          <img
+                            className="detailIcon"
+                            src={ratingIcon}
+                            alt={intl.formatMessage({ id: 'Rating' })}
+                          />
                           <p>{service.rating ?? '-'}</p>
                           <img className="detailIcon" src={usersIcon} alt="" />
                           <p>
-                            <FormattedMessage id="RatingsCount" values={{ count: service.ratingCount }} />
+                            <FormattedMessage
+                              id="RatingsCount"
+                              values={{ count: service.ratingCount }}
+                            />
                           </p>
                         </div>
                         <div className="cardDetail-datos-segunda">
                           <p>
-                            <FormattedNumber value={service.pricePerHour} style="currency" currency="COP" maximumFractionDigits={0} />/
+                            <FormattedNumber
+                              value={service.pricePerHour}
+                              style="currency"
+                              currency="COP"
+                              maximumFractionDigits={0}
+                            />
+                            /
                             <FormattedMessage id="Hour" />
                           </p>
                         </div>
@@ -208,7 +238,11 @@ export default function ServiceResults() {
                           </p>
                         </Link>
                       </div>
-                      <button type="button" className="buttonMessage" onClick={() => openChat(service)}>
+                      <button
+                        type="button"
+                        className="buttonMessage"
+                        onClick={() => openChat(service)}
+                      >
                         <img className="detailIcon" src={messageIcon} alt="" />
                         <FormattedMessage id="SendMessage" />
                       </button>
