@@ -43,7 +43,7 @@ function clearPendingProfile() {
 
 export async function createProfile(profile) {
   const created = await run(
-    client.mutations.createProfile({
+    client.mutations.registerProfile({
       name: profile.name.trim(),
       role: profile.role,
       city: profile.city.trim(),

@@ -86,7 +86,7 @@ No model accepts writes from users; writes are the custom mutations of §6.
 
 ## 6. API (custom operations)
 
-Mutations: `createProfile`, `updateProfile`, `saveService` (create or edit), `deleteService`,
+Mutations: `registerProfile`, `editProfile`, `saveService` (create or edit), `removeService`,
 `bookService`, `cancelBooking`, `rateBooking`, `openChat`, `sendMessage`. Each takes only
 what the user decides; the caller's identity, names, prices and copies are filled in by the
 Lambda.

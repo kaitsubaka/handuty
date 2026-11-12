@@ -51,7 +51,7 @@ function ContactModal({ show, initial, onClose, onSaved }) {
     }
     setSaving(true);
     try {
-      await run(client.mutations.updateProfile(form));
+      await run(client.mutations.editProfile(form));
       await onSaved();
     } catch (error) {
       setErrorId(errorMessageId(error));
@@ -136,7 +136,7 @@ function WorkerServices({ session }) {
       return;
     }
     try {
-      await run(client.mutations.deleteService({ id: service.id }));
+      await run(client.mutations.removeService({ id: service.id }));
       setServices((current) => current.filter((item) => item.id !== service.id));
     } catch (error) {
       setErrorId(errorMessageId(error));

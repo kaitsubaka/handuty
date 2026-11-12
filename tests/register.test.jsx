@@ -12,7 +12,7 @@ const auth = vi.hoisted(() => ({
   signIn: vi.fn(),
   resendSignUpCode: vi.fn(),
 }));
-const mutations = vi.hoisted(() => ({ createProfile: vi.fn() }));
+const mutations = vi.hoisted(() => ({ registerProfile: vi.fn() }));
 const session = vi.hoisted(() => ({ status: 'signedOut', refresh: vi.fn() }));
 
 vi.mock('aws-amplify/auth', () => auth);
@@ -60,7 +60,7 @@ beforeEach(() => {
   auth.signUp.mockResolvedValue({ nextStep: { signUpStep: 'CONFIRM_SIGN_UP' } });
   auth.confirmSignUp.mockResolvedValue({});
   auth.signIn.mockResolvedValue({ nextStep: { signInStep: 'DONE' } });
-  mutations.createProfile.mockResolvedValue({ data: { userId: 'u1' }, errors: undefined });
+  mutations.registerProfile.mockResolvedValue({ data: { userId: 'u1' }, errors: undefined });
 });
 
 afterEach(() => {
@@ -117,7 +117,7 @@ describe('Register', () => {
 
     expect(auth.confirmSignUp).toHaveBeenCalledWith({ username: 'ana@example.com', confirmationCode: '123456' });
     expect(auth.signIn).toHaveBeenCalledWith({ username: 'ana@example.com', password: 'Str0ng!Pass' });
-    expect(mutations.createProfile).toHaveBeenCalledWith({
+    expect(mutations.registerProfile).toHaveBeenCalledWith({
       name: 'Ana Pérez',
       role: 'WORKER',
       city: 'Bogotá',

@@ -92,7 +92,7 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
 - **Guards** (`RequireSession`): signed-out users go to `/login`, users without a profile to
   `/complete-profile`, a page for the other role redirects to `/home`.
 - **Sign-up**: step 1 (account) → step 2 (personal data) → `signUp` → step 3 (email code) →
-  `confirmSignUp` → `signIn` → `createProfile`. The step 2 data is kept in `sessionStorage`
+  `confirmSignUp` → `signIn` → `registerProfile`. The step 2 data is kept in `sessionStorage`
   (`lib/pendingProfile.js`) so a reload or a sign-in from the login page can finish it in
   `/complete-profile`.
 - **Data access**: `lib/api.js` `run`/`unwrap` turn `{ data, errors }` into a value or an

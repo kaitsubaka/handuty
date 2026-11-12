@@ -124,7 +124,7 @@ const schema = a
       .authorization((allow) => [allow.authenticated()])
       .handler(a.handler.function(api)),
 
-    createProfile: a
+    registerProfile: a
       .mutation()
       .arguments({
         name: a.string().required(),
@@ -139,7 +139,7 @@ const schema = a
       .authorization((allow) => [allow.authenticated()])
       .handler(a.handler.function(api)),
 
-    updateProfile: a
+    editProfile: a
       .mutation()
       .arguments({
         city: a.string().required(),
@@ -162,7 +162,7 @@ const schema = a
       .authorization((allow) => [allow.authenticated()])
       .handler(a.handler.function(api)),
 
-    deleteService: a
+    removeService: a
       .mutation()
       .arguments({ id: a.id().required() })
       .returns(a.id())

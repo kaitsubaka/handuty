@@ -62,7 +62,7 @@ async function requireRole(userId: string, role: Role) {
   return profile;
 }
 
-async function createProfile(args: Args, { callerId, now }: Context) {
+async function registerProfile(args: Args, { callerId, now }: Context) {
   const input = args as ProfileInput;
   assertProfileInput(input, now);
   const existing = must('getProfile', await client.models.Profile.get({ userId: callerId }));
@@ -80,7 +80,7 @@ async function createProfile(args: Args, { callerId, now }: Context) {
     }),
   );
   return must(
-    'createProfile',
+    'registerProfile',
     await client.models.Profile.create({
       userId: callerId,
       name: input.name.trim(),
@@ -90,7 +90,7 @@ async function createProfile(args: Args, { callerId, now }: Context) {
   );
 }
 
-async function updateProfile(args: Args, { callerId }: Context) {
+async function editProfile(args: Args, { callerId }: Context) {
   const input = args as { city: string; phone: string; address: string };
   assertContactInput(input);
   await profileOf(callerId);
@@ -103,7 +103,7 @@ async function updateProfile(args: Args, { callerId }: Context) {
     }),
   );
   return must(
-    'updateProfile',
+    'editProfile',
     await client.models.Profile.update({ userId: callerId, city: input.city.trim() }),
   );
 }
@@ -150,7 +150,7 @@ async function saveService(args: Args, { callerId }: Context) {
   );
 }
 
-async function deleteService(args: Args, { callerId, now }: Context) {
+async function removeService(args: Args, { callerId, now }: Context) {
   const { id } = args as { id: string };
   const service = found(must('getService', await client.models.Service.get({ id })), 'SERVICE_NOT_FOUND');
   if (service.workerId !== callerId) {
@@ -167,7 +167,7 @@ async function deleteService(args: Args, { callerId, now }: Context) {
   if (upcoming.length > 0) {
     throw new RuleError('SERVICE_HAS_BOOKINGS');
   }
-  must('deleteService', await client.models.Service.delete({ id }));
+  must('removeService', await client.models.Service.delete({ id }));
   return id;
 }
 
@@ -308,10 +308,10 @@ async function sendMessage(args: Args, { callerId, now }: Context) {
 
 const resolvers: Record<string, (args: Args, context: Context) => Promise<unknown>> = {
   busySlots,
-  createProfile,
-  updateProfile,
+  registerProfile,
+  editProfile,
   saveService,
-  deleteService,
+  removeService,
   bookService,
   cancelBooking,
   rateBooking,
