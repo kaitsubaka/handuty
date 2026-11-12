@@ -2,23 +2,18 @@
 
 Current limitations and work still to do. Implemented changes belong in `CHANGELOG.md`.
 
-## Deploy (the owner does these)
+## Deploy
 
-- Install the AWS CLI (`winget install Amazon.AWSCLI`), sign in with IAM Identity Center
-  (`aws configure sso`) and bootstrap the account once (`npx ampx sandbox` explains it on the
-  first run). Then `npx ampx sandbox` deploys a personal copy and writes
-  `amplify_outputs.json`.
-- Create an AWS Budgets alert (for example USD 1/month) before sharing the app.
-- Amplify Hosting: connect the GitHub repository and branch, keep `amplify.yml`, and add the
-  SPA rewrite rule `</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>`
-  → `/index.html` (200).
+- Local sandbox (optional): install the AWS CLI (`winget install Amazon.AWSCLI`), sign in with
+  IAM Identity Center (`aws configure sso`), then `npx ampx sandbox` deploys a personal copy
+  and writes `amplify_outputs.json`.
 
 ## Verification after the first deploy
 
 - Check that `Message.onCreate` subscriptions deliver to both participants and to nobody else
   (owner filtering with `ownersDefinedIn('participants')` on events written by IAM).
-- Check that secondary indexes on the `category` enum field deploy and answer
-  `servicesByCategory`.
+- Check that `servicesByCategory` (index on the `category` enum field) answers queries; the
+  index itself deploys.
 - Check that the Cognito default email sender delivers the verification code (it is limited
   to a few emails per day; SES is needed for real traffic).
 

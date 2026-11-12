@@ -37,6 +37,9 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 - [x] 3.11 Component tests (Register, Book) and helper tests; 52 tests green; production build green
 
 ### Phase 4 — Cloud
-- [!] 4.1 First `npx ampx sandbox` deploy: needs AWS credentials on this machine (`TODO.md`)
-- [ ] 4.2 End-to-end check in the browser against the sandbox (both roles, chat between two browsers)
-- [ ] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
+- [x] 4.1 First cloud deploy through Amplify Hosting (us-east-1, branch `amplify-gen2`); the
+  local sandbox is optional and still needs AWS credentials on the machine (`TODO.md`)
+- [ ] 4.2 End-to-end check in the browser against the deployed app (both roles, chat between
+  two browsers)
+- [x] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
+  (USD 1/month)

@@ -28,10 +28,16 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 - Translated messages for every error a user can cause.
 - Workers-per-category chart now draws its bars and is public through guest access.
 - 52 tests (business rules, helpers, sign-up and booking flows) and `amplify.yml` for Amplify
-  Hosting.
+  Hosting (Node 22, npm 11).
+- Deployed on Amplify Hosting in us-east-1 with an SPA rewrite rule and a USD 1/month budget
+  alert.
 
 ### Fixed
 
+- First cloud deploy: `package-lock.json` lacked entries bundled inside the Amplify constructs
+  (`npm ci` refused it), and the custom mutations `createProfile`, `updateProfile` and
+  `deleteService` collided with the generated model mutations; they are now
+  `registerProfile`, `editProfile` and `removeService`.
 - v1 stored passwords in plain text and compared them in the API; Cognito handles them now.
 - v1 controllers queried by the wrong filter (`find(id)`), returned past bookings as
   upcoming (filters without `return`) and referenced a missing `Trabajador` model.

@@ -55,8 +55,10 @@ npm run dev          # http://localhost:3000
 ```
 
 Deploy: connect the repository in the Amplify console (Amplify Hosting); `amplify.yml`
-deploys the backend, runs the tests and publishes the Vite build. See `TODO.md` for the
-one-time console steps (SPA rewrite rule, budget alert).
+deploys the backend, runs the tests and publishes the Vite build. Add the SPA rewrite rule in
+Hosting → Rewrites and redirects:
+`</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>`
+→ `/index.html` (200).
 
 ## Credits
 
