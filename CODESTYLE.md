@@ -38,6 +38,12 @@
 - React: function components and hooks; one page per file in `src/pages/` with its CSS next to
   it; shared pieces in `src/components/`.
 
+## Dependencies
+
+- After adding, removing or updating a package, run `npm install --package-lock-only` and
+  `npm run check:lock`: npm can write a lockfile without the packages bundled inside the
+  Amplify constructs, and the build's `npm ci` then refuses it.
+
 ## Branches (gitflow)
 
 - `master` is production: it only receives merges from `release/*` and `hotfix/*`.
