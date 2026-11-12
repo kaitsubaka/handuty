@@ -43,6 +43,21 @@ Details: [SPECS.md](SPECS.md) (decisions, business rules, data model),
 - Personal data (phone, ID number, birth date, address) is readable only by its owner.
 - Public landing page with a chart of workers per category.
 
+## Live demo
+
+https://develop.d1l89y1rcg3qnl.amplifyapp.com (Amplify Hosting, branch `develop`)
+
+Public sign-up is closed; sign in with one of the demo accounts:
+
+| Role     | Email                 | Password               |
+| -------- | --------------------- | ---------------------- |
+| Worker   | `worker@handuty.test` | `Handuty-Worker-2026!` |
+| Customer | `client@handuty.test` | `Handuty-Client-2026!` |
+
+They are shared demo accounts: anyone can read and change their data, so never put real
+personal data in them. `.test` is a reserved domain, so no email is ever sent. To create them
+in a new environment, run `scripts/create-demo-users.sh <user-pool-id>` in AWS CloudShell.
+
 ## Run it
 
 Requirements: Node 20+ and, for the backend, an AWS account with credentials on the machine.

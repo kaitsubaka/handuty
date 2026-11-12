@@ -42,9 +42,11 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 
 ### Phase 4 — Cloud
 
-- [x] 4.1 First cloud deploy through Amplify Hosting (us-east-1, branch `amplify-gen2`); the
+- [x] 4.1 First cloud deploy through Amplify Hosting (us-east-1, now branch `develop`); the
       local sandbox is optional and still needs AWS credentials on the machine (`TODO.md`)
 - [ ] 4.2 End-to-end check in the browser against the deployed app (both roles, chat between
       two browsers)
 - [x] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
       (USD 1/month)
+- [ ] 4.4 Demo accounts (`scripts/create-demo-users.sh`) created in the `develop` user pool and
+      their profiles completed (Worker and Customer)
