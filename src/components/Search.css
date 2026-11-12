@@ -1,0 +1,68 @@
+.searchBar {
+  display: flex;
+  text-align: center;
+  background-color: #f4f2f2;
+  border-radius: 20px;
+  height: 37px;
+  width: 350px;
+  margin-left: 6vw;
+  margin-top: 5vh;
+}
+
+.searchBar input {
+  background-color: #f4f2f2;
+  border: none;
+  border-radius: 20px;
+  height: 35px;
+  width: 350px;
+  margin-left: 1.5rem;
+  color: #373842;
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+
+.searchBar input::placeholder {
+  color: #373842;
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.searchIcon {
+  margin-left: 1.5rem;
+  width: 17px;
+}
+
+.ans {
+}
+
+@media (min-width: 1600px) {
+  .searchBar {
+    margin-left: 8vw;
+  }
+}
+
+#searchText {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  width: 260px;
+  margin-left: 1.5rem;
+  color: #373842;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  text-align: start;
+}
+
+.searchBarBut {
+  background-color: transparent;
+  border: none;
+  margin-left: 0 !important;
+}
+
+input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}

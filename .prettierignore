@@ -1,0 +1,7 @@
+dist
+coverage
+.amplify
+amplify_outputs*.json
+package-lock.json
+src/assets
+public

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.amplify/
+amplify_outputs*
+amplifyconfiguration*
+.env*
+*.log
+.DS_Store
+coverage/
