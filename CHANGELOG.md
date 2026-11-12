@@ -4,6 +4,11 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
 ## 2026-11-12 — v2.0.1
 
+### Fixed
+
+- `package-lock.json` lost the packages bundled inside the Amplify constructs again when the
+  lint tools were installed; it is complete again and `npm run check:lock` catches it.
+
 ### Changed
 
 - Prettier and ESLint format and lint the code; the Amplify build fails on any finding.
