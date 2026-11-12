@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CATEGORIES } from '../constants/categories';
@@ -29,10 +29,7 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
   const [saving, setSaving] = useState(false);
   const [errorId, setErrorId] = useState(null);
 
-  useEffect(() => {
-    if (!show) {
-      return;
-    }
+  function resetForm() {
     const free = CATEGORIES.find((category) => !takenCategories.includes(category.key));
     setForm(
       service
@@ -41,7 +38,7 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
     );
     setTouched(false);
     setErrorId(null);
-  }, [show, service, takenCategories]);
+  }
 
   const errors = validate(form);
 
@@ -74,7 +71,7 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
   }
 
   return (
-    <Modal show={show} onHide={onClose} animation={false}>
+    <Modal show={show} onShow={resetForm} onHide={onClose} animation={false}>
       <Form noValidate onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>

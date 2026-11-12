@@ -33,13 +33,11 @@ function ContactModal({ show, initial, onClose, onSaved }) {
   const [saving, setSaving] = useState(false);
   const [errorId, setErrorId] = useState(null);
 
-  useEffect(() => {
-    if (show) {
-      setForm(initial);
-      setTouched(false);
-      setErrorId(null);
-    }
-  }, [show, initial]);
+  function resetForm() {
+    setForm(initial);
+    setTouched(false);
+    setErrorId(null);
+  }
 
   const errors = contactErrors(form);
 
@@ -61,7 +59,7 @@ function ContactModal({ show, initial, onClose, onSaved }) {
   }
 
   return (
-    <Modal show={show} onHide={onClose} animation={false}>
+    <Modal show={show} onShow={resetForm} onHide={onClose} animation={false}>
       <Form noValidate onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage, FormattedNumber, FormattedTime } from 'react-intl';
@@ -105,20 +105,26 @@ export default function Appointments() {
   const [toRate, setToRate] = useState(null);
   const [errorId, setErrorId] = useState(null);
 
-  const load = useCallback(() => {
-    setBookings(null);
-    setFailed(false);
-    return myBookings(session, { upcoming: !past })
-      .then(setBookings)
+  useEffect(() => {
+    let active = true;
+    myBookings(session, { upcoming: !past })
+      .then((loaded) => active && setBookings(loaded))
       .catch((error) => {
         console.error('[appointments] could not load bookings', error);
-        setFailed(true);
+        if (active) {
+          setFailed(true);
+        }
       });
+    return () => {
+      active = false;
+    };
   }, [session, past]);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  function togglePast() {
+    setBookings(null);
+    setFailed(false);
+    setPast(!past);
+  }
 
   async function handleMessage(booking) {
     if (!isClient) {
@@ -173,7 +179,7 @@ export default function Appointments() {
             <input
               type="checkbox"
               checked={past}
-              onChange={() => setPast(!past)}
+              onChange={togglePast}
               aria-labelledby="upcomingLabel pastLabel"
             />
             <span className="slider round"></span>

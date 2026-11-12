@@ -6,7 +6,7 @@ import { IntlProvider } from 'react-intl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import { locale, messages } from './lib/locale';
-import { SessionProvider } from './context/Session';
+import { SessionProvider } from './context/SessionProvider';
 import App from './App';
 
 createRoot(document.getElementById('root')).render(

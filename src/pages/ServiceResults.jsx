@@ -45,22 +45,21 @@ export default function ServiceResults() {
   const [params] = useSearchParams();
   const category = CATEGORIES.some((item) => item.key === params.get('category')) ? params.get('category') : null;
   const text = params.get('q')?.trim().toLowerCase() ?? '';
-  const [services, setServices] = useState(null);
-  const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState({ category: undefined, services: null, failed: false });
+  const { services, failed } =
+    loaded.category === category ? loaded : { services: null, failed: false };
   const [range, setRange] = useState('');
   const [sort, setSort] = useState('');
   const [errorId, setErrorId] = useState(null);
 
   useEffect(() => {
     let active = true;
-    setServices(null);
-    setFailed(false);
     loadServices(category)
-      .then((loaded) => active && setServices(loaded))
+      .then((items) => active && setLoaded({ category, services: items, failed: false }))
       .catch((error) => {
         console.error('[services] could not load services', error);
         if (active) {
-          setFailed(true);
+          setLoaded({ category, services: null, failed: true });
         }
       });
     return () => {

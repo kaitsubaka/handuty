@@ -20,6 +20,12 @@ function appendUnique(messages, message) {
   return messages.some((item) => item.id === message.id) ? messages : [...messages, message];
 }
 
+function withMessage(thread, message) {
+  return thread.chatId === message.chatId
+    ? { ...thread, messages: appendUnique(thread.messages, message) }
+    : thread;
+}
+
 function withActivity(chats, chatId, message) {
   const updated = chats.map((chat) =>
     chat.id === chatId ? { ...chat, lastMessage: message.content, lastMessageAt: message.sentAt } : chat,
@@ -33,13 +39,14 @@ export default function Messenger() {
   const [params, setParams] = useSearchParams();
   const selectedId = params.get('chat');
   const [chats, setChats] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [thread, setThread] = useState({ chatId: null, messages: [] });
   const [draft, setDraft] = useState('');
   const [sending, setSending] = useState(false);
   const [errorId, setErrorId] = useState(null);
   const bottom = useRef(null);
   const selected = chats?.find((chat) => chat.id === selectedId) ?? null;
   const openChatId = selected?.id;
+  const messages = thread.chatId === openChatId ? thread.messages : [];
 
   useEffect(() => {
     myChats(session)
@@ -53,18 +60,17 @@ export default function Messenger() {
 
   useEffect(() => {
     if (!openChatId) {
-      setMessages([]);
       return undefined;
     }
     let active = true;
     all((nextToken) =>
       client.models.Message.messagesByChat({ chatId: openChatId }, { sortDirection: 'ASC', limit: 100, nextToken }),
     )
-      .then((loaded) => active && setMessages(loaded))
+      .then((loaded) => active && setThread({ chatId: openChatId, messages: loaded }))
       .catch((error) => console.error('[messages] could not load messages', error));
     const subscription = client.models.Message.onCreate({ filter: { chatId: { eq: openChatId } } }).subscribe({
       next: (message) => {
-        setMessages((current) => appendUnique(current, message));
+        setThread((current) => withMessage(current, message));
         setChats((current) => withActivity(current, message.chatId, message));
       },
       error: (error) => console.warn('[messages] live updates stopped', error),
@@ -77,7 +83,7 @@ export default function Messenger() {
 
   useEffect(() => {
     bottom.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [thread]);
 
   async function handleSend(event) {
     event.preventDefault();
@@ -88,7 +94,7 @@ export default function Messenger() {
     setSending(true);
     try {
       const message = await run(client.mutations.sendMessage({ chatId: selected.id, content }));
-      setMessages((current) => appendUnique(current, message));
+      setThread((current) => withMessage(current, message));
       setChats((current) => withActivity(current, selected.id, message));
       setDraft('');
     } catch (error) {
