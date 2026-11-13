@@ -36,11 +36,13 @@ pending work in `TODO.md`, implemented changes in `CHANGELOG.md`.
 ```
 amplify/                    Amplify Gen 2 backend (TypeScript, its own tsconfig)
   backend.ts                defineBackend({ auth, data, api })
-  auth/resource.ts          email sign-in, verification email text
+  auth/resource.ts          email sign-in, verification email text, no account recovery
+  auth/pre-token-generation/ trigger that drops the self-service scope from access tokens
   data/resource.ts          schema: enums, 6 models, 1 custom type, custom query + mutations
   functions/api/
     resource.ts             defineFunction (Node 22, arm64, 512 MB, 10 s, logs 1 week, data stack)
-    handler.ts              routes event.info.fieldName to a resolver, data client with IAM
+    handler.ts              routes each operation to a resolver, data client with IAM
+    invocation.ts           reads field, arguments and caller from Amplify's function event
     rules.ts                pure business rules, RuleError codes (unit tested)
 src/                        React app (JSX)
   main.jsx                  Amplify.configure, IntlProvider, Router, SessionProvider
@@ -54,6 +56,7 @@ src/                        React app (JSX)
   assets/                   illustrations and icons of v1
 tests/                      vitest: rules (node), api helpers, Login, Register and Book (jsdom)
 amplify.yml                 Amplify Hosting build: backend pipeline-deploy, tests, Vite build
+customHttp.yml              security headers for every hosted file (CSP, HSTS, framing)
 ```
 
 ## 3. Data schema (`amplify/data/resource.ts`)
@@ -84,6 +87,9 @@ amplify.yml                 Amplify Hosting build: backend pipeline-deploy, test
   failure is logged at `error` with the operation name and surfaces as `HANDUTY:INTERNAL`.
 - Overlap check: bookings of the service whose `startAt` is between `start − 120 min` and
   `end` (the longest booking is 120 min), then `rules.assertNoOverlap`.
+- Abuse limits: `bookService` counts the caller's upcoming bookings (`bookingsByClient`, at
+  most 10 read) and `sendMessage` counts the caller's messages in the chat during the last
+  minute (`messagesByChat` by `sentAt`); both are single index queries, no extra table.
 
 ## 5. Front end
 

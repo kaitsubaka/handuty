@@ -2,6 +2,24 @@
 
 Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
+## Unreleased
+
+### Added
+
+- Free abuse limits in the `api` Lambda: a client holds at most 10 upcoming bookings, bookings
+  are at most 90 days ahead, a participant sends at most 10 messages per chat per minute, and
+  the hourly price is capped at 10,000,000.
+- Demo accounts cannot change their password, email or delete themselves: a pre token
+  generation trigger (version 2) drops the `aws.cognito.signin.user.admin` scope from access
+  tokens, and account recovery ("forgot password") is admin only.
+- Security headers on every hosted file (`customHttp.yml`): Content-Security-Policy, HSTS,
+  `X-Frame-Options: DENY`, `nosniff`, Referrer-Policy and Permissions-Policy.
+
+### Fixed
+
+- English texts: "Appoinment", "resservation", "succesfully", "receave", "future forks" and
+  the "$20k.000" price filter label.
+
 ## 2026-11-12 — v2.0.1
 
 ### Added

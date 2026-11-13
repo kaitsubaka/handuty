@@ -55,7 +55,8 @@ Public sign-up is closed; sign in with one of the demo accounts:
 | Customer | `client@handuty.test` | `Handuty-Client-2026!` |
 
 They are shared demo accounts: anyone can read and change their data, so never put real
-personal data in them. `.test` is a reserved domain, so no email is ever sent. To create them
+personal data in them. Their passwords cannot be changed and they cannot be deleted from the
+app or the Cognito API. `.test` is a reserved domain, so no email is ever sent. To create them
 in a new environment, run `scripts/create-demo-users.sh <user-pool-id>` in AWS CloudShell.
 
 ## Run it

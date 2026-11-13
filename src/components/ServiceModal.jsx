@@ -6,12 +6,13 @@ import { client } from '../lib/amplify';
 import { errorMessageId, run } from '../lib/api';
 
 const MIN_PRICE = 1000;
+const MAX_PRICE = 10_000_000;
 const EMPTY = { category: CATEGORIES[0].key, pricePerHour: '', description: '' };
 
 function validate(form) {
   const errors = {};
   const price = Number(form.pricePerHour);
-  if (!Number.isInteger(price) || price < MIN_PRICE) {
+  if (!Number.isInteger(price) || price < MIN_PRICE || price > MAX_PRICE) {
     errors.pricePerHour = 'VerPrice';
   }
   const length = form.description.trim().length;
@@ -111,6 +112,7 @@ export default function ServiceModal({ show, service, takenCategories, onClose, 
             <Form.Control
               type="number"
               min={MIN_PRICE}
+              max={MAX_PRICE}
               step={500}
               name="pricePerHour"
               value={form.pricePerHour}

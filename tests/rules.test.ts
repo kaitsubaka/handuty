@@ -2,15 +2,20 @@ import { describe, expect, it } from 'vitest';
 import {
   RuleError,
   ageInYears,
+  MAX_MESSAGES_PER_MINUTE,
+  MAX_UPCOMING_BOOKINGS,
   applyRating,
+  assertBookingQuota,
   assertCanCancel,
   assertCanRate,
+  assertMessageRate,
   assertNoOverlap,
   assertProfileInput,
   assertServiceInput,
   bookingInterval,
   bookingPrice,
   chatIdFor,
+  messageRateWindowStart,
   normalizeMessage,
   overlapSearchFrom,
 } from '../amplify/functions/api/rules';
@@ -79,6 +84,7 @@ describe('assertServiceInput', () => {
     [{ category: 'Pintura' }, 'INVALID_CATEGORY'],
     [{ pricePerHour: 999 }, 'INVALID_PRICE'],
     [{ pricePerHour: 1500.5 }, 'INVALID_PRICE'],
+    [{ pricePerHour: 10_000_001 }, 'INVALID_PRICE'],
     [{ description: 'short' }, 'INVALID_DESCRIPTION'],
     [{ description: 'x'.repeat(161) }, 'INVALID_DESCRIPTION'],
   ])('rejects %o with %s', (override, code) => {
@@ -97,8 +103,13 @@ describe('bookingInterval', () => {
     ['2026-11-13T14:15:00.000Z', 30, 'INVALID_START'],
     ['garbage', 30, 'INVALID_START'],
     ['2026-11-13T14:00:00.000Z', 45, 'INVALID_DURATION'],
+    ['2027-02-11T15:30:00.000Z', 30, 'START_TOO_FAR'],
   ])('rejects %s for %d min with %s', (startAt, duration, code) => {
     expect(codeOf(() => bookingInterval(startAt, duration, NOW))).toBe(code);
+  });
+
+  it('accepts a start exactly 90 days ahead', () => {
+    expect(codeOf(() => bookingInterval('2027-02-10T15:00:00.000Z', 30, NOW))).toBeUndefined();
   });
 
   it('searches far enough back to catch the longest booking', () => {
@@ -194,5 +205,21 @@ describe('messages and chats', () => {
   it('gives one chat id per client and worker pair', () => {
     expect(chatIdFor('c1', 'w1')).toBe(chatIdFor('c1', 'w1'));
     expect(chatIdFor('c1', 'w1')).not.toBe(chatIdFor('w1', 'c1'));
+  });
+});
+
+describe('abuse limits', () => {
+  it('lets a client hold up to the maximum of upcoming bookings', () => {
+    expect(codeOf(() => assertBookingQuota(MAX_UPCOMING_BOOKINGS - 1))).toBeUndefined();
+    expect(codeOf(() => assertBookingQuota(MAX_UPCOMING_BOOKINGS))).toBe('TOO_MANY_BOOKINGS');
+  });
+
+  it('limits the messages one participant sends to a chat per minute', () => {
+    expect(codeOf(() => assertMessageRate(MAX_MESSAGES_PER_MINUTE - 1))).toBeUndefined();
+    expect(codeOf(() => assertMessageRate(MAX_MESSAGES_PER_MINUTE))).toBe('TOO_MANY_MESSAGES');
+  });
+
+  it('counts messages from the last minute', () => {
+    expect(messageRateWindowStart(NOW).toISOString()).toBe('2026-11-12T15:09:00.000Z');
   });
 });
