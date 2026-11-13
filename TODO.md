@@ -17,10 +17,8 @@ Current limitations and work still to do. Implemented changes belong in `CHANGEL
 
 - Check that `Message.onCreate` subscriptions deliver to both participants and to nobody else
   (owner filtering with `ownersDefinedIn('participants')` on events written by IAM).
-- Check that `servicesByCategory` (index on the `category` enum field) answers queries; the
-  index itself deploys.
-- Check that the Cognito default email sender delivers the verification code (it is limited
-  to a few emails per day; SES is needed for real traffic).
+- If public sign-up is reopened: check that the Cognito default email sender delivers the
+  verification code (it is limited to a few emails per day; SES is needed for real traffic).
 
 ## Backend
 

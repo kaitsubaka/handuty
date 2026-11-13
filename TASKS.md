@@ -44,9 +44,15 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 
 - [x] 4.1 First cloud deploy through Amplify Hosting (us-east-1, now branch `develop`); the
       local sandbox is optional and still needs AWS credentials on the machine (`TODO.md`)
-- [ ] 4.2 End-to-end check in the browser against the deployed app (both roles, chat between
-      two browsers)
+- [x] 4.2 End-to-end check in the browser against `develop` (2026-11-12/13), both roles:
+      profile completion, publishing a service, search with autocomplete, price filter,
+      booking, taken slots disabled and an overlapping booking refused by the backend,
+      messages both ways, cancel, rate (average shown on the service); live delivery to a
+      second open session is still to check (`TODO.md`)
 - [x] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
       (USD 1/month)
-- [ ] 4.4 Demo accounts (`scripts/create-demo-users.sh`) created in the `develop` user pool and
+- [x] 4.4 Demo accounts (`scripts/create-demo-users.sh`) created in the `develop` user pool and
       their profiles completed (Worker and Customer)
+- [x] 4.5 Free abuse limits, security headers and locked demo passwords, checked on `develop`:
+      headers served, ChangePassword, DeleteUser and ForgotPassword refused for a demo token,
+      sign-in, reads and writes still work

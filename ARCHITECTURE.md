@@ -54,7 +54,7 @@ src/                        React app (JSX)
   constants/                categories, roles, navigation
   locales/                  es.json, en.json (same keys, enforced by a test)
   assets/                   illustrations and icons of v1
-tests/                      vitest: rules (node), api helpers, Login, Register and Book (jsdom)
+tests/                      vitest: rules (node), api helpers, Login, Register, Book and Appointments (jsdom)
 amplify.yml                 Amplify Hosting build: backend pipeline-deploy, tests, Vite build
 customHttp.yml              security headers for every hosted file (CSP, HSTS, framing)
 ```
@@ -118,14 +118,15 @@ customHttp.yml              security headers for every hosted file (CSP, HSTS, f
 
 ## 6. Tests
 
-| File                       | Env   | Covers                                                                        |
-| -------------------------- | ----- | ----------------------------------------------------------------------------- |
-| `tests/rules.test.ts`      | node  | every business rule and error code                                            |
-| `tests/invocation.test.ts` | node  | reading the Amplify function event (field, arguments, caller)                 |
-| `tests/api.test.js`        | node  | error mapping, `unwrap`, locale key parity, every backend code translated     |
-| `tests/register.test.jsx`  | jsdom | step validation, underage refusal, sign-up → confirm → profile, Cognito error |
-| `tests/login.test.jsx`     | jsdom | sign-in, first sign-in with a new password (validated)                        |
-| `tests/book.test.jsx`      | jsdom | total price, booking call, busy slot refused locally, backend rule message    |
+| File                          | Env   | Covers                                                                        |
+| ----------------------------- | ----- | ----------------------------------------------------------------------------- |
+| `tests/rules.test.ts`         | node  | every business rule and error code                                            |
+| `tests/invocation.test.ts`    | node  | reading the Amplify function event (field, arguments, caller)                 |
+| `tests/api.test.js`           | node  | error mapping, `unwrap`, locale key parity, every backend code translated     |
+| `tests/register.test.jsx`     | jsdom | step validation, underage refusal, sign-up → confirm → profile, Cognito error |
+| `tests/login.test.jsx`        | jsdom | sign-in, first sign-in with a new password (validated)                        |
+| `tests/book.test.jsx`         | jsdom | total price, booking call, busy slot refused locally, backend rule message    |
+| `tests/appointments.test.jsx` | jsdom | the upcoming / past words switch the list                                     |
 
 Amplify, Cognito and the session are mocked at the module boundary (`vi.mock`); no test
 needs AWS.
