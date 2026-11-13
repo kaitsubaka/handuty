@@ -36,7 +36,8 @@ pending work in `TODO.md`, implemented changes in `CHANGELOG.md`.
 ```
 amplify/                    Amplify Gen 2 backend (TypeScript, its own tsconfig)
   backend.ts                defineBackend({ auth, data, api })
-  auth/resource.ts          email sign-in, verification email text
+  auth/resource.ts          email sign-in, verification email text, no account recovery
+  auth/pre-token-generation/ trigger that drops the self-service scope from access tokens
   data/resource.ts          schema: enums, 6 models, 1 custom type, custom query + mutations
   functions/api/
     resource.ts             defineFunction (Node 22, arm64, 512 MB, 10 s, logs 1 week, data stack)

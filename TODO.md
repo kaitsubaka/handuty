@@ -6,8 +6,8 @@ Current limitations and work still to do. Implemented changes belong in `CHANGEL
 
 - Demo accounts: `scripts/create-demo-users.sh <user-pool-id>` in AWS CloudShell creates the two
   accounts listed in `README.md`; public sign-up is closed (SPECS D12).
-- The demo passwords are public: anyone can sign in and change them through the Cognito API,
-  which would lock the demo out until the script runs again.
+- The demo passwords are public, but they cannot be changed (SPECS D13); anyone can still
+  edit the demo profiles, services and bookings through the app.
 
 - Local sandbox (optional): install the AWS CLI (`winget install Amazon.AWSCLI`), sign in with
   IAM Identity Center (`aws configure sso`), then `npx ampx sandbox` deploys a personal copy
