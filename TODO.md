@@ -30,7 +30,9 @@ Current limitations and work still to do. Implemented changes belong in `CHANGEL
 - `rateBooking` updates the service average with read-then-write; two ratings at the same
   instant can lose one. An atomic `ADD` on `ratingSum`/`ratingCount` would fix it.
 - `busySlots` reads at most 1000 upcoming bookings of a service.
-- No rate limiting on `sendMessage` beyond AppSync's own limits.
+- Rate limits are per user and per chat; one account can still call read queries as fast as
+  AppSync allows. A per-IP limit needs AWS WAF, which is not free.
+- `customHttp.yml` keeps `'unsafe-inline'` for styles (Bootstrap and d3 set inline styles).
 - Account deletion and data export are not implemented.
 
 ## Front end

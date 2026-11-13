@@ -9,13 +9,18 @@ import {
   applyRating,
   assertCanCancel,
   assertCanRate,
+  assertBookingQuota,
   assertContactInput,
+  assertMessageRate,
   assertNoOverlap,
   assertProfileInput,
   assertServiceInput,
   bookingInterval,
   bookingPrice,
+  MAX_MESSAGES_PER_MINUTE,
+  MAX_UPCOMING_BOOKINGS,
   chatIdFor,
+  messageRateWindowStart,
   normalizeMessage,
   overlapSearchFrom,
   type Category,
@@ -180,6 +185,15 @@ async function bookService(args: Args, { callerId, now }: Context) {
   const input = args as { serviceId: string; startAt: string; durationMinutes: number };
   const interval = bookingInterval(input.startAt, input.durationMinutes, now);
   const clientProfile = await requireRole(callerId, 'CLIENT');
+  const upcoming =
+    must(
+      'bookingsByClient',
+      await client.models.Booking.bookingsByClient(
+        { clientId: callerId, startAt: { gt: now.toISOString() } },
+        { selectionSet: ['id'], limit: MAX_UPCOMING_BOOKINGS },
+      ),
+    ) ?? [];
+  assertBookingQuota(upcoming.length);
   const service = found(
     must('getService', await client.models.Service.get({ id: input.serviceId })),
     'SERVICE_NOT_FOUND',
@@ -302,6 +316,15 @@ async function sendMessage(args: Args, { callerId, now }: Context) {
   if (!chat.participants.includes(callerId)) {
     throw new RuleError('FORBIDDEN');
   }
+  const recent =
+    must(
+      'messagesByChat',
+      await client.models.Message.messagesByChat(
+        { chatId, sentAt: { gt: messageRateWindowStart(now).toISOString() } },
+        { selectionSet: ['senderId'], limit: 2 * MAX_MESSAGES_PER_MINUTE },
+      ),
+    ) ?? [];
+  assertMessageRate(recent.filter((message) => message.senderId === callerId).length);
   const sentAt = now.toISOString();
   const message = must(
     'createMessage',

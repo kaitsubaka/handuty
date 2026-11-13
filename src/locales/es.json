@@ -165,7 +165,7 @@
   "SendMessage": "Enviar mensaje",
   "Total": "Total",
   "VerDescription": "La descripción debe tener entre 10 y 160 caracteres",
-  "VerPrice": "El precio por hora debe ser un número entero de mínimo 1000",
+  "VerPrice": "El precio por hora debe ser un número entero entre 1000 y 10.000.000",
   "error.EMAIL_TAKEN": "Ya existe una cuenta con ese correo",
   "error.EXPIRED_CODE": "El código venció, pide uno nuevo",
   "error.WRONG_CODE": "El código no es correcto",
@@ -188,7 +188,7 @@
   "error.CATEGORY_TAKEN": "Ya ofreces un servicio en esa categoría",
   "error.SERVICE_HAS_BOOKINGS": "El servicio tiene citas próximas y no se puede eliminar",
   "error.INVALID_CATEGORY": "Categoría no válida",
-  "error.INVALID_PRICE": "El precio por hora debe ser un número entero de mínimo 1000",
+  "error.INVALID_PRICE": "El precio por hora debe ser un número entero entre 1000 y 10.000.000",
   "error.INVALID_DESCRIPTION": "La descripción debe tener entre 10 y 160 caracteres",
   "error.INVALID_NAME": "Nombre debe contener al menos un carácter",
   "error.INVALID_ROLE": "Tipo de usuario no válido",
@@ -205,5 +205,8 @@
   "SignUpClosed": "El registro está cerrado: esta demo usa cuentas de prueba.",
   "NewPasswordTitle": "Es tu primer inicio de sesión: elige una contraseña nueva.",
   "NewPassword": "Nueva contraseña",
-  "SaveNewPassword": "Guardar contraseña"
+  "SaveNewPassword": "Guardar contraseña",
+  "error.START_TOO_FAR": "Las citas se pueden reservar hasta con 90 días de anticipación",
+  "error.TOO_MANY_BOOKINGS": "Ya tienes 10 citas próximas, cancela una primero",
+  "error.TOO_MANY_MESSAGES": "Estás enviando mensajes muy rápido, espera un minuto"
 }

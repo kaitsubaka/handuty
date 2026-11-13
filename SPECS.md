@@ -59,18 +59,19 @@ Two roles, chosen when the profile is created and never changed: `CLIENT` and `W
 
 - R1 Users are 18 or older (birth date checked on profile creation).
 - R2 A profile is created once per user; the role cannot change afterwards.
-- R3 Service: one per category per worker; price per hour ≥ 1000 (COP); description 10–160
+- R3 Service: one per category per worker; price per hour from 1000 to 10,000,000 (COP); description 10–160
   characters; category from the fixed list of 11.
 - R4 Booking: only clients book; not in the past; starts on a 30-minute boundary; duration 30,
-  60, 90 or 120 minutes; must not overlap another booking of the same service; total price =
-  hourly price × hours.
+  60, 90 or 120 minutes; at most 90 days ahead; must not overlap another booking of the same
+  service; a client holds at most 10 upcoming bookings; total price = hourly price × hours.
 - R5 Cancel: only the client of the booking, only before it starts.
 - R6 Rate: only the client, only after the booking ended, only once, integer 1–5. The service
   keeps `ratingSum` / `ratingCount` and an average.
 - R7 Deleting a service keeps its past bookings (they carry their own copy of the data); it is
   refused while the service has upcoming bookings.
 - R8 Chats are opened by the client with a worker (one chat per pair); messages are 1–1000
-  characters; only the two participants read the chat and its messages.
+  characters; each participant sends at most 10 messages per chat per minute; only the two
+  participants read the chat and its messages.
 
 ## 5. Data model
 
@@ -110,6 +111,13 @@ shows the translation `error.<CODE>`.
   DynamoDB 25 GB are always free, Cognito's first 10k MAU are free, AppSync and Amplify Hosting
   are free for 12 months or covered by the new-account credits. An AWS Budgets alert is the
   owner's job (`TODO.md`).
+- Abuse and cost guards, all free (no WAF): the account is on the AWS Free plan, which is never
+  charged (the credits are used and then free access ends), so the worst an attack can do is
+  spend credits. Cognito throttles sign-in; sign-up is closed (D12); the account caps Lambda at
+  10 concurrent executions; R4 and R8 limit bookings and messages per user; every text input
+  has a maximum length; Amplify Hosting sends security headers (`customHttp.yml`: CSP, HSTS,
+  no framing, no sniffing). Shield Standard (free, automatic on CloudFront) absorbs network
+  floods.
 
 ## 8. Non-functional requirements
 

@@ -26,9 +26,22 @@ export const SLOT_MINUTES = 30;
 
 export const MIN_PRICE_PER_HOUR = 1000;
 
+export const MAX_PRICE_PER_HOUR = 10_000_000;
+
+/** Bookings can be made at most this far ahead. */
+export const MAX_BOOKING_DAYS = 90;
+
+/** Upcoming bookings one client can hold at the same time. */
+export const MAX_UPCOMING_BOOKINGS = 10;
+
+/** Messages one participant can send to one chat per minute. */
+export const MAX_MESSAGES_PER_MINUTE = 10;
+
 export const ADULT_AGE = 18;
 
 const MINUTE_MS = 60 * 1000;
+
+const DAY_MS = 24 * 60 * MINUTE_MS;
 
 /**
  * A broken business rule. The message travels to the client as `HANDUTY:<code>` so the UI can
@@ -97,7 +110,9 @@ export function assertServiceInput(input: {
 }): void {
   ensure((CATEGORIES as readonly string[]).includes(input.category), 'INVALID_CATEGORY');
   ensure(
-    Number.isInteger(input.pricePerHour) && input.pricePerHour >= MIN_PRICE_PER_HOUR,
+    Number.isInteger(input.pricePerHour) &&
+      input.pricePerHour >= MIN_PRICE_PER_HOUR &&
+      input.pricePerHour <= MAX_PRICE_PER_HOUR,
     'INVALID_PRICE',
   );
   ensure(
@@ -118,6 +133,7 @@ export function bookingInterval(startAt: string, durationMinutes: number, now: D
     'INVALID_START',
   );
   ensure(start.getTime() > now.getTime(), 'START_IN_PAST');
+  ensure(start.getTime() <= now.getTime() + MAX_BOOKING_DAYS * DAY_MS, 'START_TOO_FAR');
   ensure((DURATIONS_MINUTES as readonly number[]).includes(durationMinutes), 'INVALID_DURATION');
   return { start, end: new Date(start.getTime() + durationMinutes * MINUTE_MS) };
 }
@@ -139,6 +155,21 @@ export function assertNoOverlap(
     overlaps(interval, { start: new Date(booking.startAt), end: new Date(booking.endAt) }),
   );
   ensure(!clash, 'SLOT_TAKEN');
+}
+
+/** Keeps one account from filling every worker's calendar. */
+export function assertBookingQuota(upcomingBookings: number): void {
+  ensure(upcomingBookings < MAX_UPCOMING_BOOKINGS, 'TOO_MANY_BOOKINGS');
+}
+
+/** Start of the window in which `assertMessageRate` counts messages. */
+export function messageRateWindowStart(now: Date): Date {
+  return new Date(now.getTime() - MINUTE_MS);
+}
+
+/** Keeps one account from flooding a chat (and the bill) with messages. */
+export function assertMessageRate(sentInLastMinute: number): void {
+  ensure(sentInLastMinute < MAX_MESSAGES_PER_MINUTE, 'TOO_MANY_MESSAGES');
 }
 
 export function bookingPrice(pricePerHour: number, durationMinutes: number): number {
