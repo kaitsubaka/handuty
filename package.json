@@ -1,0 +1,63 @@
+{
+  "name": "handuty",
+  "version": "2.0.0",
+  "description": "Marketplace for general services: clients book trusted workers. React + AWS Amplify Gen 2.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p amplify",
+    "sandbox": "ampx sandbox",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:lock": "npm ci --dry-run --ignore-scripts"
+  },
+  "dependencies": {
+    "aws-amplify": "^6.22.2",
+    "bootstrap": "^5.3.9",
+    "d3": "^7.9.2",
+    "date-fns": "^4.4.0",
+    "joi": "^18.3.2",
+    "joi-password-complexity": "^5.2.0",
+    "react": "^19.3.1",
+    "react-bootstrap": "^2.10.10",
+    "react-datepicker": "^9.1.0",
+    "react-dom": "^19.3.1",
+    "react-intl": "^12.1.7",
+    "react-router-dom": "^7.18.5",
+    "timeago.js": "^4.3.1"
+  },
+  "devDependencies": {
+    "@aws-amplify/backend": "^1.25.1",
+    "@aws-amplify/backend-cli": "^1.10.0",
+    "@eslint/js": "^9.39.5",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.10",
+    "@types/aws-lambda": "^8.10.164",
+    "@vitejs/plugin-react": "^6.3.0",
+    "aws-cdk-lib": "^2.276.0",
+    "constructs": "^10.8.1",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.14.0",
+    "jsdom": "^31.0.0",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

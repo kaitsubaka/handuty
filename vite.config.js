@@ -1,0 +1,11 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 3000 },
+  test: {
+    include: ['tests/**/*.test.{ts,js,jsx}'],
+    env: { VITE_SIGN_UP_OPEN: 'true' },
+  },
+});

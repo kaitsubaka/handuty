@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  min-height: 50vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.emptyPage {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyPage p {
+  font-family: 'Open Sans';
+  color: #373842;
+  font-size: 0.8rem;
+  margin-top: 1vh;
+}
+
+.emptyPage-bold {
+  font-weight: 600;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-size: 1rem !important;
+}
+
+.emptyIcon {
+  height: 20vh;
+}
+
+.emptyPage span {
+  color: #a3caf7;
+  font-family: 'Open Sans';
+}
+
+.emptyPage a:hover {
+  text-decoration-color: #a3caf7;
+}
+
+.iconButton {
+  border: none;
+  background: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

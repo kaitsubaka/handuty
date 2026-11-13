@@ -1,53 +1,82 @@
-# HANDUTY 202110_S1_E3
+# Handuty
 
-DESCRIPCIÓN DE PROYECTO
+Handuty connects people who need a general service (carpentry, plumbing, painting, cleaning,
+pet care…) with trained workers, quickly, easily and safely. Workers publish what they offer
+with an hourly price; clients find them, book a time slot, chat with them and rate the job.
 
-Handuty es una plataforma en la que los usuarios podrán encontrar personal capacitado en servicios generales como carpintería, pintura o limpieza de forma rápida, fácil y segura. Además, los trabajadores podrán publicar los servicios que prestan y asignarles un costo por hora. 
+- Problem: finding a reliable person for a general service is hard and unsafe.
+- Solution: a web platform that connects clients with workers by rating, hourly price and
+  description of their work.
 
-* Problema: Encontrar personal capacitado y serio que preste un servicio general es una tarea difícil e insegura
+v1 was built in 2021 as a university project (React + Express + MongoDB). v2 rebuilds the
+platform on a serverless AWS stack inside the Free Tier, keeping the original product design.
+It was engineered with AI pair programming (Claude) using spec-driven development: every change
+starts in `SPECS.md` and ends in tests and `CHANGELOG.md`.
 
-* Solución: Conectar prestadores de servicios generales capacitados con usuarios que los necesiten de forma rápida, fácil y segura
+## Stack
 
-* Propuesta: Plataforma WEB en la que usuarios podrán conectar con trabajadores dependiendo de su calificación, cobro por hora y descripción de las labores que desempeña
+| Layer          | Technology                                                                     |
+| -------------- | ------------------------------------------------------------------------------ |
+| Front end      | React 19, Vite, React Router 7, Bootstrap 5, react-intl (es/en), d3            |
+| Auth           | Amazon Cognito (email + verification code), guest access for the landing chart |
+| API            | AWS AppSync (GraphQL) with owner-based authorization and live subscriptions    |
+| Data           | Amazon DynamoDB (6 models, secondary indexes)                                  |
+| Business logic | One AWS Lambda (Node 22, arm64) for every write, pure rules with unit tests    |
+| Infrastructure | AWS Amplify Gen 2 (TypeScript, code-first), Amplify Hosting                    |
+| Tests          | Vitest + Testing Library (65 tests, no AWS needed)                             |
 
-En el siguiente enlace se presenta la descripción del proyecto https://youtu.be/iXBas3co0v8.
+```
+Browser ── reads ──► AppSync ──► DynamoDB        (owner rules decide what each user sees)
+        ── writes ─► AppSync ──► Lambda `api` ──► rules.ts ──► AppSync (IAM) ──► DynamoDB
+        ◄─ live ───  AppSync subscriptions (chat)
+```
 
-RECURSOS
-En este proyecto todas las ilustraciones utilizadas se tomaron de unDraw y de Stories by Freepik las cuales son de uso libre y gratuito. Los íconos de tomaron de FlatIcon, también de uso libre y gratuito. 
+Details: [SPECS.md](SPECS.md) (decisions, business rules, data model),
+[ARCHITECTURE.md](ARCHITECTURE.md) (how it is built).
 
-LIVE DEMO
-En el siguiente enlace https://youtu.be/v_ypzvT571c se presenta un video en el que se explican las funcionalidades core de Handuty.
+## Features
 
-NOTA
-Salen 21 issues de accesibilidad relacionados con D3 que dicen que requieren revisión pero que no tienen ningún fundamento porque el contraste de color es muy bueno entre blanco del fondo y negro del texto. 
+- Sign-up in three steps (account, personal data, email code), adults only.
+- Clients: browse 11 categories, search with autocomplete, filter by price, sort by name,
+  price or rating, book a slot (taken slots are disabled), cancel, rate, chat with workers.
+- Workers: publish one service per category, edit or delete it, see their bookings, chat.
+- Personal data (phone, ID number, birth date, address) is readable only by its owner.
+- Public landing page with a chart of workers per category.
 
-PATRONES DE DISEÑO (UI_Patterns)
+## Live demo
 
-Los patrones de diseño utilizados en esta plataforma son:
-* Password Strength Meter: Se utiliza en el registro paragarantizar que el usuario sepa que tiene que poner mayúscula, minúscula, número, caracter especial y una longitud mínima. Esto también se verifica para poder crear la cuenta. 
-* Input feedback: En los formularios como los de registr y login se les informa a los usuarios que deben poner antes de enviar el forms. 
-* Calendar Picker: A la hora de crear una cita, se habilita un calendar picker en el que el cliente solo puede seleccionar las horas en las que puede agendar una cita para que no cometá errores.
-* Input prompt: En todos los casos, cuando es necesario, se ponen placeholders o labels para indicar al usuario que debe hacer. 
-* Steps Left: el registro se divide en varios pasos ya que la información en esta cambia dependiente dle tip de usuario. Se indica claramente. 
-* Rate content: Para las citas pasadas del cliente, es posible calificar a los trabajadores. 
-* Breadcumbs: Cuando se navegan los servicios, se tiene un breadcumbs de tal forma que el usuario sepa en que lugar de la aplicación se encuentra.
-* Home Link (reemplazo de fat footer): Cada vez que los usuarios hagan click en el icono, volverán a sus respectivas páginas home con sus dashboards personalizados. 
-* Menu: En los filtros se utilizaron menús de dropdown para mostrar las diferentes opciones a los usuarios. También se utilizó en la barra de búsqueda. En el menú principal no se consideró necesario debido a que hay muy pocas opciones. 
-* Carousel: en los home de cliente y trabajador se tienen carruseles para que puedan ver todas las citas futuras que tienen. 
-* Cards: Todos los servicios y citas se presentan como cards.
-* Table filter: Todos los servicios que ve el cliente tienen filtros habilitados.
-* Sort by column: Todos los serivcios que ve el cliente se pueden ordenar.
-* Dashboard: Tanto cliente como trabajador tienen dashboards en sus respectivoos homes donde se presenta un resumen de la actividad de la aplicación.
-* Search Autocomplete (Reemplazo gallery): Cuando se utiliza la barra de búsqueda para buscar servicios o trabajadores, se autocompleta lo que ingresa el usuario.
-* Chat: Se implementó un chat entre clientes y trabajadores que solo puede comenzar el cliente. 
+https://develop.d1l89y1rcg3qnl.amplifyapp.com (Amplify Hosting, branch `develop`)
 
+Public sign-up is closed; sign in with one of the demo accounts:
 
-DESPLIEGUE Y USO
+| Role     | Email                 | Password               |
+| -------- | --------------------- | ---------------------- |
+| Worker   | `worker@handuty.test` | `Handuty-Worker-2026!` |
+| Customer | `client@handuty.test` | `Handuty-Client-2026!` |
 
-Para el despliegue es necesario completar los siguientes pasos.
-1. Clone el repositorio
-2. En la carpeta handuty-front ejecute el comando npm run build. Esto compilará el proyecto front y creará una nueva carpeta denominada build.
-3. Vaya al directorio raiz, abra el archivo app.js y modifique la linea correspondiente por app.use(express.static(path.join(__dirname, 'handuty-front/build')));. Con esta modificación, todas las páginas que están en este directorio serán servidas al cliente como páginas estáticas.
-4. Ahora ingresa en un navegador a la url http://localhost:3001/, podrá ver la página "estática" constuida en React.
-5. Ingrese a la carpeta front, modifique el archivo package.json e incluya esta nueva línea: "proxy": "http://localhost:3001/
+They are shared demo accounts: anyone can read and change their data, so never put real
+personal data in them. Their passwords cannot be changed and they cannot be deleted from the
+app or the Cognito API. `.test` is a reserved domain, so no email is ever sent. To create them
+in a new environment, run `scripts/create-demo-users.sh <user-pool-id>` in AWS CloudShell.
 
+## Run it
+
+Requirements: Node 20+ and, for the backend, an AWS account with credentials on the machine.
+
+```sh
+npm install
+npm test
+npx ampx sandbox     # deploys a personal backend and writes amplify_outputs.json
+npm run dev          # http://localhost:3000
+```
+
+Deploy: connect the repository in the Amplify console (Amplify Hosting); `amplify.yml`
+deploys the backend, runs the tests and publishes the Vite build. Add the SPA rewrite rule in
+Hosting → Rewrites and redirects:
+`</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>`
+→ `/index.html` (200).
+
+## Credits
+
+Illustrations from unDraw and Stories by Freepik; icons from FlatIcon (free to use).
+v1 project presentation: https://youtu.be/iXBas3co0v8 · v1 demo: https://youtu.be/v_ypzvT571c
