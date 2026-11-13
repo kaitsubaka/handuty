@@ -47,8 +47,9 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done · `[!]` blocked or wit
 - [x] 4.2 End-to-end check in the browser against `develop` (2026-11-12/13), both roles:
       profile completion, publishing a service, search with autocomplete, price filter,
       booking, taken slots disabled and an overlapping booking refused by the backend,
-      messages both ways, cancel, rate (average shown on the service); live delivery to a
-      second open session is still to check (`TODO.md`)
+      messages both ways, cancel, rate (average shown on the service); live delivery both ways
+      (the client in the browser and the worker in a second session, each saw the other's
+      message without reloading)
 - [x] 4.3 Amplify Hosting app connected to the GitHub branch, SPA rewrite rule, Budgets alert
       (USD 1/month)
 - [x] 4.4 Demo accounts (`scripts/create-demo-users.sh`) created in the `develop` user pool and
