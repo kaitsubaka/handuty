@@ -23,7 +23,7 @@ starts in `SPECS.md` and ends in tests and `CHANGELOG.md`.
 | Data           | Amazon DynamoDB (6 models, secondary indexes)                                  |
 | Business logic | One AWS Lambda (Node 22, arm64) for every write, pure rules with unit tests    |
 | Infrastructure | AWS Amplify Gen 2 (TypeScript, code-first), Amplify Hosting                    |
-| Tests          | Vitest + Testing Library (56 tests, no AWS needed)                             |
+| Tests          | Vitest + Testing Library (65 tests, no AWS needed)                             |
 
 ```
 Browser ── reads ──► AppSync ──► DynamoDB        (owner rules decide what each user sees)

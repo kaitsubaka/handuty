@@ -17,6 +17,8 @@ Implemented changes, newest first. Pending work belongs in `TODO.md`.
 
 ### Fixed
 
+- Appointments: the "upcoming" and "past" words next to the switch now change the list (only
+  the switch itself did).
 - English texts: "Appoinment", "resservation", "succesfully", "receave", "future forks" and
   the "$20k.000" price filter label.
 

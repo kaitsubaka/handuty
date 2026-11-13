@@ -139,10 +139,13 @@ export default function Appointments() {
     };
   }, [session, past]);
 
-  function togglePast() {
+  function showPast(value) {
+    if (value === past) {
+      return;
+    }
     setBookings(null);
     setFailed(false);
-    setPast(!past);
+    setPast(value);
   }
 
   async function handleMessage(booking) {
@@ -193,21 +196,33 @@ export default function Appointments() {
           </p>
         </div>
         <span className="selectCitas">
-          <strong className="lab" id="upcomingLabel">
+          <button
+            type="button"
+            className="lab"
+            id="upcomingLabel"
+            aria-pressed={!past}
+            onClick={() => showPast(false)}
+          >
             <FormattedMessage id="FutureWorks" />
-          </strong>
+          </button>
           <label className="switch">
             <input
               type="checkbox"
               checked={past}
-              onChange={togglePast}
+              onChange={() => showPast(!past)}
               aria-labelledby="upcomingLabel pastLabel"
             />
             <span className="slider round"></span>
           </label>
-          <strong className="lab" id="pastLabel">
+          <button
+            type="button"
+            className="lab"
+            id="pastLabel"
+            aria-pressed={past}
+            onClick={() => showPast(true)}
+          >
             <FormattedMessage id="PastWorks" />
-          </strong>
+          </button>
         </span>
         {failed && <EmptyState messageId="serverProblem" />}
         {!failed && bookings === null && <Loading />}
